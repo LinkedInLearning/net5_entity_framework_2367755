@@ -20,6 +20,6 @@ namespace FirstEFCoreConsoleApp
 		public DbSet<Book> Books { get; set; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
-			optionsBuilder.UseSqlite($"Data Source={Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "library.db")}");
+			optionsBuilder.UseSqlite($"Data Source={Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "FirstEFCoreConsoleApp", "library.db")}");
 	}
 }
