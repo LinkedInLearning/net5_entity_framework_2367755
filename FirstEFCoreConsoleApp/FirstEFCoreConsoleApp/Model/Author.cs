@@ -15,6 +15,8 @@ namespace FirstEFCoreConsoleApp.Model
 
 		public string LastName { get; set; }
 
+		public string Biographyy { get; set; }
+
 		public List<Book> Books { get; set; } = new List<Book>();
 
 	}
