@@ -1,0 +1,32 @@
+﻿@page "/authorDetails/{authorId:int}"
+
+@if (_author is null)
+{
+	<h1>Detalles de un autor.</h1>
+}
+else
+{
+	<h1>Detalles de @_author.Name @_author.LastName </h1>
+	<dl>
+		<dt>Nombre:</dt>
+		<dd>@_author.Name</dd>
+		<dt>Apellidos:</dt>
+		<dd>@_author.LastName</dd>
+		<dt>Bibliografía:</dt>
+		<dd>
+			@if (_author.Books.Any())
+			{
+				<ul>
+					@foreach (var book in _author.Books)
+					{
+						<li>@book.Title</li>
+					}
+				</ul>
+			}
+			else
+			{
+				<span>No existe bibliografía para este autor.</span>
+			}
+		</dd>
+	</dl>
+}

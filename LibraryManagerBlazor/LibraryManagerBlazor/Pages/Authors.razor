@@ -1,0 +1,16 @@
+﻿@page "/authors"
+
+<h1>Authors</h1>
+@if (_authors == null)
+{
+	<p>Cargando autores...</p>
+}
+else
+{
+	<ul>
+		@foreach (var author in _authors)
+		{
+			<li><a href="authorDetails/@author.AuthorId">@author.Name @author.LastName</a></li>
+		}
+	</ul>
+}
