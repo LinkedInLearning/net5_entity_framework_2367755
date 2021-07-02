@@ -28,7 +28,6 @@ namespace LibraryManagerWPF
 		{
 			// this is for demo purposes only, to make it easier
 			// to get up and running
-			_context.Database.EnsureDeleted();
 			_context.Database.EnsureCreated();
 			if (!(await _context.Authors.AnyAsync()))
 			{
