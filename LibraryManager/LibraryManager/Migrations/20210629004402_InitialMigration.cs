@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace FirstEFCoreConsoleApp.Migrations
+namespace LibraryManager.Migrations
 {
     public partial class InitialMigration : Migration
     {

@@ -1,12 +1,14 @@
-﻿using FirstEFCoreConsoleApp.Model;
+﻿using LibraryManager.Model;
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FirstEFCoreConsoleApp
+namespace LibraryManager
 {
 	class Program
 	{
@@ -14,7 +16,20 @@ namespace FirstEFCoreConsoleApp
 
 		static async Task<int> Main(string[] args)
 		{
-			_context = new LibraryContext();
+			var serviceProvider = new ServiceCollection()
+				.AddDbContext<LibraryContext>(options =>
+			{
+				var dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "LibraryManager", "library.db");
+				var dbDir = Path.GetDirectoryName(dbPath);
+				if (!Directory.Exists(dbDir))
+				{
+					Directory.CreateDirectory(dbDir);
+				}
+				options.UseSqlite($"Data Source={dbPath}");
+			}, ServiceLifetime.Transient, ServiceLifetime.Transient)
+				.BuildServiceProvider();
+
+			_context = serviceProvider.GetRequiredService<LibraryContext>();
 
 			var exit = false;
 
