@@ -37,12 +37,6 @@ namespace LibraryManagerBlazor
 				options.EnableSensitiveDataLogging();
 			});
 			services.AddSingleton<WeatherForecastService>();
-
-			services.AddDbContext<LibraryContext>(options =>
-			{
-				options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-				options.EnableSensitiveDataLogging();
-			});
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
