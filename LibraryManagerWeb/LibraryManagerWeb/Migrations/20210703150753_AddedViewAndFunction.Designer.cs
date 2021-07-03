@@ -4,14 +4,16 @@ using LibraryManagerWeb.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LibraryManagerWeb.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    partial class LibraryContextModelSnapshot : ModelSnapshot
+    [Migration("20210703150753_AddedViewAndFunction")]
+    partial class AddedViewAndFunction
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,9 +88,6 @@ namespace LibraryManagerWeb.Migrations
 
                     b.ToTable("Authors");
 
-                    b
-                        .HasComment("Tabla para almacenar los autores que tienen libros en la biblioteca.");
-
                     b.HasData(
                         new
                         {
@@ -130,9 +129,6 @@ namespace LibraryManagerWeb.Migrations
                     b.HasIndex("PublisherId");
 
                     b.ToTable("Books");
-
-                    b
-                        .HasComment("Tabla para almacenar los libros existentes en esta biblioteca.");
 
                     b.HasData(
                         new
@@ -327,9 +323,6 @@ namespace LibraryManagerWeb.Migrations
                     b.HasKey("PublisherId");
 
                     b.ToTable("Publishers");
-
-                    b
-                        .HasComment("Editoriales");
 
                     b.HasData(
                         new
