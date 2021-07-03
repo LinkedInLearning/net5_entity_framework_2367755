@@ -3,16 +3,23 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LibraryManagerWeb.Migrations
 {
-    public partial class AddedMoreEntities : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
-                name: "PublisherId",
-                table: "Books",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
+            migrationBuilder.CreateTable(
+                name: "Authors",
+                columns: table => new
+                {
+                    AuthorId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Authors", x => x.AuthorId);
+                });
 
             migrationBuilder.CreateTable(
                 name: "BookFormat",
@@ -55,33 +62,6 @@ namespace LibraryManagerWeb.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BookFile",
-                columns: table => new
-                {
-                    BookFileId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BookId = table.Column<int>(type: "int", nullable: false),
-                    InternalFilePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    FormatBookformatId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BookFile", x => x.BookFileId);
-                    table.ForeignKey(
-                        name: "FK_BookFile_BookFormat_FormatBookformatId",
-                        column: x => x.FormatBookformatId,
-                        principalTable: "BookFormat",
-                        principalColumn: "BookformatId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_BookFile_Books_BookId",
-                        column: x => x.BookId,
-                        principalTable: "Books",
-                        principalColumn: "BookId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AuditEntries",
                 columns: table => new
                 {
@@ -112,31 +92,59 @@ namespace LibraryManagerWeb.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PhisicalLibrary",
+                name: "Books",
                 columns: table => new
                 {
-                    PhisicalLibraryId = table.Column<int>(type: "int", nullable: false)
+                    BookId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CountryId = table.Column<int>(type: "int", nullable: false)
+                    AuthorId = table.Column<int>(type: "int", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Sinopsis = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PublisherId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PhisicalLibrary", x => x.PhisicalLibraryId);
+                    table.PrimaryKey("PK_Books", x => x.BookId);
                     table.ForeignKey(
-                        name: "FK_PhisicalLibrary_Country_CountryId",
-                        column: x => x.CountryId,
-                        principalTable: "Country",
-                        principalColumn: "CountryId",
+                        name: "FK_Books_Authors_AuthorId",
+                        column: x => x.AuthorId,
+                        principalTable: "Authors",
+                        principalColumn: "AuthorId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Books_Publisher_PublisherId",
+                        column: x => x.PublisherId,
+                        principalTable: "Publisher",
+                        principalColumn: "PublisherId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Books_PublisherId",
-                table: "Books",
-                column: "PublisherId");
+            migrationBuilder.CreateTable(
+                name: "BookFile",
+                columns: table => new
+                {
+                    BookFileId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BookId = table.Column<int>(type: "int", nullable: false),
+                    InternalFilePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BookFormatId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BookFile", x => x.BookFileId);
+                    table.ForeignKey(
+                        name: "FK_BookFile_BookFormat_BookFormatId",
+                        column: x => x.BookFormatId,
+                        principalTable: "BookFormat",
+                        principalColumn: "BookformatId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BookFile_Books_BookId",
+                        column: x => x.BookId,
+                        principalTable: "Books",
+                        principalColumn: "BookId",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AuditEntries_CountryId",
@@ -144,35 +152,28 @@ namespace LibraryManagerWeb.Migrations
                 column: "CountryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_BookFile_BookFormatId",
+                table: "BookFile",
+                column: "BookFormatId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_BookFile_BookId",
                 table: "BookFile",
                 column: "BookId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BookFile_FormatBookformatId",
-                table: "BookFile",
-                column: "FormatBookformatId");
+                name: "IX_Books_AuthorId",
+                table: "Books",
+                column: "AuthorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PhisicalLibrary_CountryId",
-                table: "PhisicalLibrary",
-                column: "CountryId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Books_Publisher_PublisherId",
+                name: "IX_Books_PublisherId",
                 table: "Books",
-                column: "PublisherId",
-                principalTable: "Publisher",
-                principalColumn: "PublisherId",
-                onDelete: ReferentialAction.Cascade);
+                column: "PublisherId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Books_Publisher_PublisherId",
-                table: "Books");
-
             migrationBuilder.DropTable(
                 name: "AuditEntries");
 
@@ -180,24 +181,19 @@ namespace LibraryManagerWeb.Migrations
                 name: "BookFile");
 
             migrationBuilder.DropTable(
-                name: "PhisicalLibrary");
-
-            migrationBuilder.DropTable(
-                name: "Publisher");
+                name: "Country");
 
             migrationBuilder.DropTable(
                 name: "BookFormat");
 
             migrationBuilder.DropTable(
-                name: "Country");
+                name: "Books");
 
-            migrationBuilder.DropIndex(
-                name: "IX_Books_PublisherId",
-                table: "Books");
+            migrationBuilder.DropTable(
+                name: "Authors");
 
-            migrationBuilder.DropColumn(
-                name: "PublisherId",
-                table: "Books");
+            migrationBuilder.DropTable(
+                name: "Publisher");
         }
     }
 }

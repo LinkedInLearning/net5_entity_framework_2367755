@@ -33,6 +33,8 @@ namespace LibraryManagerWeb
 				options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
 				options.EnableSensitiveDataLogging(true);
 			});
+			
+			services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

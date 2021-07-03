@@ -110,7 +110,49 @@ namespace LibraryManagerWeb.Migrations
 
                     b.HasIndex("AuthorId");
 
+                    b.HasIndex("PublisherId");
+
                     b.ToTable("Books");
+                });
+
+            modelBuilder.Entity("LibraryManagerWeb.DataAccess.BookFile", b =>
+                {
+                    b.Property<int>("BookFileId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BookFormatId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("InternalFilePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("BookFileId");
+
+                    b.HasIndex("BookFormatId");
+
+                    b.HasIndex("BookId");
+
+                    b.ToTable("BookFile");
+                });
+
+            modelBuilder.Entity("LibraryManagerWeb.DataAccess.BookFormat", b =>
+                {
+                    b.Property<int>("BookformatId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("BookformatId");
+
+                    b.ToTable("BookFormat");
                 });
 
             modelBuilder.Entity("LibraryManagerWeb.DataAccess.Country", b =>
@@ -129,6 +171,31 @@ namespace LibraryManagerWeb.Migrations
                     b.HasKey("CountryId");
 
                     b.ToTable("Country");
+                });
+
+            modelBuilder.Entity("LibraryManagerWeb.DataAccess.PhisicalBook", b =>
+                {
+                    b.Property<int>("PhisicalBookId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AuthorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PhisicalLibraryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PhisicalBookId");
+
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("PhisicalLibraryId");
+
+                    b.ToTable("PhisicalBooks", t => t.ExcludeFromMigrations());
                 });
 
             modelBuilder.Entity("LibraryManagerWeb.DataAccess.PhisicalLibrary", b =>
@@ -154,7 +221,22 @@ namespace LibraryManagerWeb.Migrations
 
                     b.HasIndex("CountryId");
 
-                    b.ToTable("PhisicalLibrary");
+                    b.ToTable("PhisicalLibraries", t => t.ExcludeFromMigrations());
+                });
+
+            modelBuilder.Entity("LibraryManagerWeb.DataAccess.Publisher", b =>
+                {
+                    b.Property<int>("PublisherId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PublisherId");
+
+                    b.ToTable("Publisher");
                 });
 
             modelBuilder.Entity("LibraryManagerWeb.DataAccess.AuditEntry", b =>
@@ -176,7 +258,53 @@ namespace LibraryManagerWeb.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("LibraryManagerWeb.DataAccess.Publisher", "Publisher")
+                        .WithMany()
+                        .HasForeignKey("PublisherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Author");
+
+                    b.Navigation("Publisher");
+                });
+
+            modelBuilder.Entity("LibraryManagerWeb.DataAccess.BookFile", b =>
+                {
+                    b.HasOne("LibraryManagerWeb.DataAccess.BookFormat", "Format")
+                        .WithMany()
+                        .HasForeignKey("BookFormatId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LibraryManagerWeb.DataAccess.Book", "Book")
+                        .WithMany("BookFiles")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+
+                    b.Navigation("Format");
+                });
+
+            modelBuilder.Entity("LibraryManagerWeb.DataAccess.PhisicalBook", b =>
+                {
+                    b.HasOne("LibraryManagerWeb.DataAccess.Author", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LibraryManagerWeb.DataAccess.PhisicalLibrary", "Library")
+                        .WithMany("Books")
+                        .HasForeignKey("PhisicalLibraryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
+
+                    b.Navigation("Library");
                 });
 
             modelBuilder.Entity("LibraryManagerWeb.DataAccess.PhisicalLibrary", b =>
@@ -191,6 +319,16 @@ namespace LibraryManagerWeb.Migrations
                 });
 
             modelBuilder.Entity("LibraryManagerWeb.DataAccess.Author", b =>
+                {
+                    b.Navigation("Books");
+                });
+
+            modelBuilder.Entity("LibraryManagerWeb.DataAccess.Book", b =>
+                {
+                    b.Navigation("BookFiles");
+                });
+
+            modelBuilder.Entity("LibraryManagerWeb.DataAccess.PhisicalLibrary", b =>
                 {
                     b.Navigation("Books");
                 });

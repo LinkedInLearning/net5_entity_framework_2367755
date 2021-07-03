@@ -1,4 +1,6 @@
-﻿using LibraryManagerWeb.DataAccess;
+﻿using AutoMapper;
+
+using LibraryManagerWeb.DataAccess;
 using LibraryManagerWeb.Models;
 
 using Microsoft.AspNetCore.Mvc;
@@ -19,22 +21,19 @@ namespace LibraryManagerWeb.Controllers
 
 		private readonly LibraryContext _context;
 
-		public HomeController(ILogger<HomeController> logger, LibraryContext context)
+		private readonly IMapper _mapper;
+
+		public HomeController(ILogger<HomeController> logger, LibraryContext context, IMapper mapper)
 		{
 			_context = context;
 			_logger = logger;
+			_mapper = mapper;
 		}
 
 		public async Task<IActionResult> Index()
 		{
-			var books = await _context.Books.OrderBy(b => b.Title).ThenBy(b => b.Author.Name).ThenBy(b => b.Author.LastName).ToListAsync();
-			foreach (var b in books)
-			{
-				b.Title += " (modified)";
-			}
-			await _context.SaveChangesAsync();
-
-			return View();
+			var phisicalLibraries = await _context.PhisicalLibraries.OrderBy(l => l.Name).ToListAsync();
+			return View(phisicalLibraries.Select(lib => _mapper.Map<PhisicalLibraryViewModel>(lib)).ToList());
 		}
 
 		public IActionResult Privacy()

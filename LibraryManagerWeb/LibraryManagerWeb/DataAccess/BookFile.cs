@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace LibraryManagerWeb.DataAccess
 {
-	[NotMapped]
 	public class BookFile
 	{
 
@@ -18,6 +17,8 @@ namespace LibraryManagerWeb.DataAccess
 
 		public string InternalFilePath { get; set; }
 
-		public BookFormat Format { get; set; }
+		public int BookFormatId { get; set; }
+
+		public BookFormat Format	 { get; set; }
 	}
 }

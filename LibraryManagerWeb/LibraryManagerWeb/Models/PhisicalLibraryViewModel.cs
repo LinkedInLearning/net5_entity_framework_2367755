@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LibraryManagerWeb.DataAccess
+namespace LibraryManagerWeb.Models
 {
-	public class PhisicalLibrary
+	public class PhisicalLibraryViewModel
 	{
 
 		public int PhisicalLibraryId { get; set; }
@@ -16,11 +16,8 @@ namespace LibraryManagerWeb.DataAccess
 
 		public string City { get; set; }
 
-		public int CountryId { get; set; }
 
-		public Country Country { get; set; }
-
-		public List<PhisicalBook> Books { get; set; }
+		public string Country { get; set; }
 
 	}
 }
