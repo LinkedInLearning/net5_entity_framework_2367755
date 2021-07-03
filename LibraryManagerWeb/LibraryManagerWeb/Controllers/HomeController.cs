@@ -33,7 +33,7 @@ namespace LibraryManagerWeb.Controllers
 		public async Task<IActionResult> Index()
 		{
 			var mostHighlyRatedBooks = await _context.MostHighlyRatedBooks.ToListAsync();
-			var proliphicAuthors = await _context.ProliphicAuthors.ToListAsync();
+			var proliphicAuthors = await _context.GetProliphicAuthors(50).ToListAsync();
 
 			return View();
 		}
