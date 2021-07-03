@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace LibraryManagerWeb.DataAccess
 {
+	[Comment("Tabla para almacenar los libros existentes en esta biblioteca.")]
 	public class Book
 	{
 

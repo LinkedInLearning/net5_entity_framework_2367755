@@ -33,7 +33,6 @@ namespace LibraryManagerWeb.DataAccess
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<Author>()
-				.HasComment("Tabla para almacenar los autores que tienen libros en la biblioteca.")
 				.HasData(new[]
 			{
 				new Author { AuthorId = 1, Name = "Stephen", LastName = "King" },
@@ -41,14 +40,12 @@ namespace LibraryManagerWeb.DataAccess
 				});
 
 			modelBuilder.Entity<Publisher>()
-				.HasComment("Editoriales")
 				.HasData(new[]
 			{
 				new Publisher { PublisherId = 1, Name = "Entre letras" }
 				});
 
 			modelBuilder.Entity<Book>()
-				.HasComment("Tabla para almacenar los libros existentes en esta biblioteca.")
 				.HasData(new[]
 			{
 				new Book { BookId = 1, AuthorId = 1, Title = "Los ojos del dragón", Sinopsis = "El libro \"Los ojos del dragón\".", PublisherId = 1 },
@@ -70,12 +67,10 @@ namespace LibraryManagerWeb.DataAccess
 				});
 
 			modelBuilder.Entity<RatedBook>()
-				.ToView("MostHighlyRatedBooks", schema: "dbo")
-				.HasNoKey();
+				.ToView("MostHighlyRatedBooks", schema: "dbo");
 
 			modelBuilder.Entity<ProliphicAuthor>()
 				.ToTable("no-table", t => t.ExcludeFromMigrations())
-				.HasNoKey()
 				.ToFunction("MostProlificAuthors", opt =>
 				{
 					opt.HasSchema("dbo");
