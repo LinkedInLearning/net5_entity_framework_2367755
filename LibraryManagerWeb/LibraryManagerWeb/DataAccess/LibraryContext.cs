@@ -14,6 +14,10 @@ namespace LibraryManagerWeb.DataAccess
 
 		public DbSet<Book> Books { get; set; }
 
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+			base.OnModelCreating(modelBuilder);
+		}
 
 		public LibraryContext(DbContextOptions<LibraryContext> options)
 			: base(options)

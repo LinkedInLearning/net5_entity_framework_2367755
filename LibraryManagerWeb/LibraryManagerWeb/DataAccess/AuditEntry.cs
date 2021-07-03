@@ -8,7 +8,7 @@ namespace LibraryManagerWeb.DataAccess
 	public class AuditEntry
 	{
 
-		public int EntryId { get; set; }
+		public int AuditEntryId { get; set; }
 
 		public DateTime Date { get; set; }
 

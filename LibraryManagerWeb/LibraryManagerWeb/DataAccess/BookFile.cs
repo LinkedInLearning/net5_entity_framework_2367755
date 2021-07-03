@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,7 +15,7 @@ namespace LibraryManagerWeb.DataAccess
 
 		public Book Book { get; set; }
 
-		public string INternalFilePath { get; set; }
+		public string InternalFilePath { get; set; }
 
 		public BookFormat Format { get; set; }
 	}

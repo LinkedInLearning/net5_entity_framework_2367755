@@ -19,7 +19,5 @@ namespace LibraryManagerWeb.DataAccess
 
 		public string Sinopsis { get; set; }
 
-		// public List<BookFormat> Formats { get; set; }
-
 	}
 }
