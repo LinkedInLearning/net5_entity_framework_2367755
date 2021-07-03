@@ -16,7 +16,7 @@ namespace LibraryManagerWeb.DataAccess
 
 		public string LastName { get; set; }
 
-		public double Stars { get; set; }
+		public decimal Stars { get; set; }
 
 	}
 }
