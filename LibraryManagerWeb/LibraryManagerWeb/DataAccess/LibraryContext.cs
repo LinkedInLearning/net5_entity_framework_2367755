@@ -14,8 +14,13 @@ namespace LibraryManagerWeb.DataAccess
 
 		public DbSet<Book> Books { get; set; }
 
+		public DbSet<AuditEntry> AuditEntries { get; set; }
+
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
+			var phisicalLibrary = modelBuilder.Entity < PhisicalLibrary>();
+			modelBuilder.Ignore<Publisher>();
+
 			base.OnModelCreating(modelBuilder);
 		}
 

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryManagerWeb.DataAccess
 {
+	[NotMapped]
 	public class BookFile
 	{
 
