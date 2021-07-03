@@ -173,57 +173,6 @@ namespace LibraryManagerWeb.Migrations
                     b.ToTable("Country");
                 });
 
-            modelBuilder.Entity("LibraryManagerWeb.DataAccess.PhisicalBook", b =>
-                {
-                    b.Property<int>("PhisicalBookId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AuthorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PhisicalLibraryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("PhisicalBookId");
-
-                    b.HasIndex("AuthorId");
-
-                    b.HasIndex("PhisicalLibraryId");
-
-                    b.ToTable("PhisicalBooks", t => t.ExcludeFromMigrations());
-                });
-
-            modelBuilder.Entity("LibraryManagerWeb.DataAccess.PhisicalLibrary", b =>
-                {
-                    b.Property<int>("PhisicalLibraryId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("CountryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("PhisicalLibraryId");
-
-                    b.HasIndex("CountryId");
-
-                    b.ToTable("PhisicalLibraries", t => t.ExcludeFromMigrations());
-                });
-
             modelBuilder.Entity("LibraryManagerWeb.DataAccess.Publisher", b =>
                 {
                     b.Property<int>("PublisherId")
@@ -288,36 +237,6 @@ namespace LibraryManagerWeb.Migrations
                     b.Navigation("Format");
                 });
 
-            modelBuilder.Entity("LibraryManagerWeb.DataAccess.PhisicalBook", b =>
-                {
-                    b.HasOne("LibraryManagerWeb.DataAccess.Author", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("LibraryManagerWeb.DataAccess.PhisicalLibrary", "Library")
-                        .WithMany("Books")
-                        .HasForeignKey("PhisicalLibraryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Author");
-
-                    b.Navigation("Library");
-                });
-
-            modelBuilder.Entity("LibraryManagerWeb.DataAccess.PhisicalLibrary", b =>
-                {
-                    b.HasOne("LibraryManagerWeb.DataAccess.Country", "Country")
-                        .WithMany()
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Country");
-                });
-
             modelBuilder.Entity("LibraryManagerWeb.DataAccess.Author", b =>
                 {
                     b.Navigation("Books");
@@ -326,11 +245,6 @@ namespace LibraryManagerWeb.Migrations
             modelBuilder.Entity("LibraryManagerWeb.DataAccess.Book", b =>
                 {
                     b.Navigation("BookFiles");
-                });
-
-            modelBuilder.Entity("LibraryManagerWeb.DataAccess.PhisicalLibrary", b =>
-                {
-                    b.Navigation("Books");
                 });
 #pragma warning restore 612, 618
         }

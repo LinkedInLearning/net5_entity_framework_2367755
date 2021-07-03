@@ -32,8 +32,7 @@ namespace LibraryManagerWeb.Controllers
 
 		public async Task<IActionResult> Index()
 		{
-			var phisicalLibraries = await _context.PhisicalLibraries.OrderBy(l => l.Name).ToListAsync();
-			return View(phisicalLibraries.Select(lib => _mapper.Map<PhisicalLibraryViewModel>(lib)).ToList());
+			return View();
 		}
 
 		public IActionResult Privacy()

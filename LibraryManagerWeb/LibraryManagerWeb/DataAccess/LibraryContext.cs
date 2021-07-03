@@ -16,18 +16,9 @@ namespace LibraryManagerWeb.DataAccess
 
 		public DbSet<AuditEntry> AuditEntries { get; set; }
 
-		public DbSet<PhisicalLibrary> PhisicalLibraries { get; set; }
-
-		public DbSet<PhisicalBook> PhisicalBooks { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			modelBuilder.Entity<PhisicalLibrary>()
-				.ToTable("PhisicalLibraries", t => t.ExcludeFromMigrations());
-
-			modelBuilder.Entity<PhisicalBook>()
-				.ToTable("PhisicalBooks", t => t.ExcludeFromMigrations());
-
 			base.OnModelCreating(modelBuilder);
 		}
 

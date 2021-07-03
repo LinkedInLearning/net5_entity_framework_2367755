@@ -1,17 +1,9 @@
-﻿@using LibraryManagerWeb.Models
-@model IEnumerable<PhisicalLibraryViewModel>
-@{
+﻿@{
 	ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-	<h1 class="display-4">Librerías físicas</h1>
+	<h1 class="display-4">Biblioteca virtual</h1>
 </div>
-<div class="jumbotron">
-	<ul>
-		@foreach (var library in Model)
-		{
-			<li><a href="LIbraryDetail/@library.PhisicalLibraryId">@library.Name</a></li>
-		}
-	</ul>
-</div>
+
+<p>Bienvenido a esta biblioteca virtual</p>
