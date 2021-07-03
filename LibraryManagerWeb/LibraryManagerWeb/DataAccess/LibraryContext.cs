@@ -39,9 +39,11 @@ namespace LibraryManagerWeb.DataAccess
 				new Author { AuthorId = 2, Name = "Isaac", LastName = "Asimov" }
 				});
 
-			modelBuilder.Entity<Publisher>()
-				.HasData(new[]
-			{
+			var publisherEntity = modelBuilder.Entity<Publisher>();
+			publisherEntity.Property(p => p.Name).HasColumnName("PublisherName");
+
+			publisherEntity.HasData(new[]
+		{
 				new Publisher { PublisherId = 1, Name = "Entre letras" }
 				});
 

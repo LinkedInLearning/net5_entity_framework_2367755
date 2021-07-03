@@ -15,6 +15,7 @@ namespace LibraryManagerWeb.DataAccess
 
 		public Book Book { get; set; }
 
+		[Column("FilePath")]
 		public string InternalFilePath { get; set; }
 
 		public int BookFormatId { get; set; }
