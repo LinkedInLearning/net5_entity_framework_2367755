@@ -48,6 +48,7 @@ namespace LibraryManagerWeb.DataAccess
 				});
 
 			modelBuilder.Entity<Book>()
+				.Ignore(p => p.LoadedDate)
 				.HasData(new[]
 			{
 				new Book { BookId = 1, AuthorId = 1, Title = "Los ojos del dragón", Sinopsis = "El libro \"Los ojos del dragón\".", PublisherId = 1 },

@@ -22,6 +22,8 @@ namespace LibraryManagerWeb.DataAccess
 
 		public string Sinopsis { get; set; }
 
+		public DateTime LoadedDate { get; set; }
+
 		public List<BookFile> BookFiles { get; set; }
 
 		public int PublisherId { get; set; }
