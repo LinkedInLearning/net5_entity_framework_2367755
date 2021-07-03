@@ -16,9 +16,14 @@ namespace LibraryManagerWeb.DataAccess
 
 		public DbSet<AuditEntry> AuditEntries { get; set; }
 
+		public DbSet<BookFile> BookFiles { get; set; }
+
+		public DbSet<Publisher> Publishers { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
+			modelBuilder.Entity<Country>()
+				.ToTable("Countries");
 			base.OnModelCreating(modelBuilder);
 		}
 
