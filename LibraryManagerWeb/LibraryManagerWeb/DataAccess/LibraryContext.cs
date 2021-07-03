@@ -56,8 +56,9 @@ namespace LibraryManagerWeb.DataAccess
 				new Book { BookId = 3, AuthorId = 2, Title = "Yo, robot", Sinopsis = "Es el libro \"Yo, robot\".\"." , PublisherId = 1 }
 				});
 
-			modelBuilder.Entity<BookRating>()
-				.HasData(new[]
+			var bookRatingEntity = modelBuilder.Entity<BookRating>();
+			bookRatingEntity.Property(p => p.Stars).HasColumnType("decimal(2,4");
+			bookRatingEntity.HasData(new[]
 			{
 				new BookRating { BookRatingId = 1, BookId = 1, Username = "juanjo", Stars = 5 },
 				new BookRating { BookRatingId = 2, BookId = 1, Username = "Lola", Stars = 3 },

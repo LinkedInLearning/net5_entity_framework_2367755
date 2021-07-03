@@ -15,6 +15,7 @@ namespace LibraryManagerWeb.DataAccess
 
 		public int AuthorId { get; set; }
 
+		[Column(TypeName = "nvarchar(200")]
 		public string Name { get; set; }
 
 		public string LastName { get; set; }
