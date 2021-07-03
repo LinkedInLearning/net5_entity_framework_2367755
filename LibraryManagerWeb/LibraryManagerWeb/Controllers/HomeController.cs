@@ -25,14 +25,14 @@ namespace LibraryManagerWeb.Controllers
 			_logger = logger;
 		}
 
-		public async Task<IActionResult> Index()
+		public IActionResult Index()
 		{
-			var books = await _context.Books.OrderBy(b => b.Title).ThenBy(b => b.Author.Name).ThenBy(b => b.Author.LastName).ToListAsync();
+			var books = _context.Books.OrderBy(b => b.Title).ThenBy(b => b.Author.Name).ThenBy(b => b.Author.LastName).ToList();
 			foreach (var b in books)
 			{
 				b.Title += " (modified)";
 			}
-			await _context.SaveChangesAsync();
+			_context.SaveChanges();
 
 			return View();
 		}
