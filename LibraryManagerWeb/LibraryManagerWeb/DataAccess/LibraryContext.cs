@@ -27,7 +27,7 @@ namespace LibraryManagerWeb.DataAccess
 
 		public DbSet<RatedBook> MostHighlyRatedBooks { get; set; }
 
-		public DbSet<ProliphicAuthor> ProliphicAuthors { get; set; }
+		public IQueryable<ProliphicAuthor> GetProliphicAuthors(int rows) => FromExpression(() => GetProliphicAuthors(rows));
 
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -69,12 +69,15 @@ namespace LibraryManagerWeb.DataAccess
 			modelBuilder.Entity<RatedBook>()
 				.ToView("MostHighlyRatedBooks", schema: "dbo");
 
+			modelBuilder.HasDbFunction(typeof(LibraryContext).GetMethod(nameof(GetProliphicAuthors), new[] { typeof(int) }))
+				.HasName("MostProlificAuthors")
+				.HasSchema("dbo");
+
 			modelBuilder.Entity<ProliphicAuthor>()
-				.ToTable("no-table", t => t.ExcludeFromMigrations())
-				.ToFunction("MostProlificAuthors", opt =>
-				{
-					opt.HasSchema("dbo");
-				});
+				.HasNoKey()
+				.ToTable("no-table", t => t.ExcludeFromMigrations());
+
+
 			base.OnModelCreating(modelBuilder);
 		}
 
