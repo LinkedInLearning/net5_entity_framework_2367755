@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace LibraryManagerWeb.DataAccess
 {
+	[Comment("Tabla para almacenar los libros existentes en esta biblioteca.")]
 	public class Book
 	{
 

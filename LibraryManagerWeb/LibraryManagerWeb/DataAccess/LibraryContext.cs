@@ -32,30 +32,31 @@ namespace LibraryManagerWeb.DataAccess
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			var author = modelBuilder.Entity<Author>();
-			author.HasData(new[]
+			modelBuilder.Entity<Author>()
+				.HasComment("Tabla para almacenar los autores que tienen libros en la biblioteca.")
+				.HasData(new[]
 			{
 				new Author { AuthorId = 1, Name = "Stephen", LastName = "King" },
 				new Author { AuthorId = 2, Name = "Isaac", LastName = "Asimov" }
 				});
 
-			var publisher = modelBuilder.Entity<Publisher>();
-
-			publisher.HasData(new[]
+			modelBuilder.Entity<Publisher>()
+				.HasComment("Editoriales")
+				.HasData(new[]
 			{
 				new Publisher { PublisherId = 1, Name = "Entre letras" }
 				});
 
-			var book = modelBuilder.Entity<Book>();
-			book.HasData(new[]
+			modelBuilder.Entity<Book>()
+				.HasData(new[]
 			{
 				new Book { BookId = 1, AuthorId = 1, Title = "Los ojos del dragón", Sinopsis = "El libro \"Los ojos del dragón\".", PublisherId = 1 },
 				new Book { BookId = 2, AuthorId = 1, Title = "La torre oscura I", Sinopsis = "Es el libro \"La torre oscura I\"." , PublisherId = 1 },
 				new Book { BookId = 3, AuthorId = 2, Title = "Yo, robot", Sinopsis = "Es el libro \"Yo, robot\".\"." , PublisherId = 1 }
 				});
 
-			var bookRating = modelBuilder.Entity<BookRating>();
-			bookRating.HasData(new[]
+			modelBuilder.Entity<BookRating>()
+				.HasData(new[]
 			{
 				new BookRating { BookRatingId = 1, BookId = 1, Username = "juanjo", Stars = 5 },
 				new BookRating { BookRatingId = 2, BookId = 1, Username = "Lola", Stars = 3 },
