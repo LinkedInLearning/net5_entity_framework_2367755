@@ -22,7 +22,7 @@ namespace LibraryManagerWeb.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BookFormat",
+                name: "BookFormats",
                 columns: table => new
                 {
                     BookformatId = table.Column<int>(type: "int", nullable: false)
@@ -31,11 +31,11 @@ namespace LibraryManagerWeb.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BookFormat", x => x.BookformatId);
+                    table.PrimaryKey("PK_BookFormats", x => x.BookformatId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Country",
+                name: "Countries",
                 columns: table => new
                 {
                     CountryId = table.Column<int>(type: "int", nullable: false)
@@ -45,11 +45,11 @@ namespace LibraryManagerWeb.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Country", x => x.CountryId);
+                    table.PrimaryKey("PK_Countries", x => x.CountryId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Publisher",
+                name: "Publishers",
                 columns: table => new
                 {
                     PublisherId = table.Column<int>(type: "int", nullable: false)
@@ -58,7 +58,7 @@ namespace LibraryManagerWeb.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Publisher", x => x.PublisherId);
+                    table.PrimaryKey("PK_Publishers", x => x.PublisherId);
                 });
 
             migrationBuilder.CreateTable(
@@ -84,9 +84,9 @@ namespace LibraryManagerWeb.Migrations
                 {
                     table.PrimaryKey("PK_AuditEntries", x => x.AuditEntryId);
                     table.ForeignKey(
-                        name: "FK_AuditEntries_Country_CountryId",
+                        name: "FK_AuditEntries_Countries_CountryId",
                         column: x => x.CountryId,
-                        principalTable: "Country",
+                        principalTable: "Countries",
                         principalColumn: "CountryId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -112,15 +112,15 @@ namespace LibraryManagerWeb.Migrations
                         principalColumn: "AuthorId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Books_Publisher_PublisherId",
+                        name: "FK_Books_Publishers_PublisherId",
                         column: x => x.PublisherId,
-                        principalTable: "Publisher",
+                        principalTable: "Publishers",
                         principalColumn: "PublisherId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "BookFile",
+                name: "BookFiles",
                 columns: table => new
                 {
                     BookFileId = table.Column<int>(type: "int", nullable: false)
@@ -131,15 +131,15 @@ namespace LibraryManagerWeb.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BookFile", x => x.BookFileId);
+                    table.PrimaryKey("PK_BookFiles", x => x.BookFileId);
                     table.ForeignKey(
-                        name: "FK_BookFile_BookFormat_BookFormatId",
+                        name: "FK_BookFiles_BookFormats_BookFormatId",
                         column: x => x.BookFormatId,
-                        principalTable: "BookFormat",
+                        principalTable: "BookFormats",
                         principalColumn: "BookformatId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_BookFile_Books_BookId",
+                        name: "FK_BookFiles_Books_BookId",
                         column: x => x.BookId,
                         principalTable: "Books",
                         principalColumn: "BookId",
@@ -152,13 +152,13 @@ namespace LibraryManagerWeb.Migrations
                 column: "CountryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BookFile_BookFormatId",
-                table: "BookFile",
+                name: "IX_BookFiles_BookFormatId",
+                table: "BookFiles",
                 column: "BookFormatId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BookFile_BookId",
-                table: "BookFile",
+                name: "IX_BookFiles_BookId",
+                table: "BookFiles",
                 column: "BookId");
 
             migrationBuilder.CreateIndex(
@@ -178,13 +178,13 @@ namespace LibraryManagerWeb.Migrations
                 name: "AuditEntries");
 
             migrationBuilder.DropTable(
-                name: "BookFile");
+                name: "BookFiles");
 
             migrationBuilder.DropTable(
-                name: "Country");
+                name: "Countries");
 
             migrationBuilder.DropTable(
-                name: "BookFormat");
+                name: "BookFormats");
 
             migrationBuilder.DropTable(
                 name: "Books");
@@ -193,7 +193,7 @@ namespace LibraryManagerWeb.Migrations
                 name: "Authors");
 
             migrationBuilder.DropTable(
-                name: "Publisher");
+                name: "Publishers");
         }
     }
 }

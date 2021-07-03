@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryManagerWeb.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    [Migration("20210703074902_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20210703080630_AddedBookRatings")]
+    partial class AddedBookRatings
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -139,7 +139,7 @@ namespace LibraryManagerWeb.Migrations
 
                     b.HasIndex("BookId");
 
-                    b.ToTable("BookFile");
+                    b.ToTable("BookFiles");
                 });
 
             modelBuilder.Entity("LibraryManagerWeb.DataAccess.BookFormat", b =>
@@ -154,7 +154,30 @@ namespace LibraryManagerWeb.Migrations
 
                     b.HasKey("BookformatId");
 
-                    b.ToTable("BookFormat");
+                    b.ToTable("BookFormats");
+                });
+
+            modelBuilder.Entity("LibraryManagerWeb.DataAccess.BookRating", b =>
+                {
+                    b.Property<int>("BookRatingId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Stars")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("BookRatingId");
+
+                    b.HasIndex("BookId");
+
+                    b.ToTable("BookRatings");
                 });
 
             modelBuilder.Entity("LibraryManagerWeb.DataAccess.Country", b =>
@@ -172,7 +195,7 @@ namespace LibraryManagerWeb.Migrations
 
                     b.HasKey("CountryId");
 
-                    b.ToTable("Country");
+                    b.ToTable("Countries");
                 });
 
             modelBuilder.Entity("LibraryManagerWeb.DataAccess.Publisher", b =>
@@ -187,7 +210,7 @@ namespace LibraryManagerWeb.Migrations
 
                     b.HasKey("PublisherId");
 
-                    b.ToTable("Publisher");
+                    b.ToTable("Publishers");
                 });
 
             modelBuilder.Entity("LibraryManagerWeb.DataAccess.AuditEntry", b =>
@@ -239,6 +262,17 @@ namespace LibraryManagerWeb.Migrations
                     b.Navigation("Format");
                 });
 
+            modelBuilder.Entity("LibraryManagerWeb.DataAccess.BookRating", b =>
+                {
+                    b.HasOne("LibraryManagerWeb.DataAccess.Book", "Book")
+                        .WithMany("Ratings")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+                });
+
             modelBuilder.Entity("LibraryManagerWeb.DataAccess.Author", b =>
                 {
                     b.Navigation("Books");
@@ -247,6 +281,8 @@ namespace LibraryManagerWeb.Migrations
             modelBuilder.Entity("LibraryManagerWeb.DataAccess.Book", b =>
                 {
                     b.Navigation("BookFiles");
+
+                    b.Navigation("Ratings");
                 });
 #pragma warning restore 612, 618
         }
