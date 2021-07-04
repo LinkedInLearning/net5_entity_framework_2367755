@@ -59,7 +59,6 @@ namespace LibraryManagerWeb.DataAccess
 				});
 
 			var bookRatingEntity = modelBuilder.Entity<BookRating>();
-			bookRatingEntity.Property(p => p.Stars).HasColumnType("decimal(2,4");
 			bookRatingEntity.HasData(new[]
 			{
 				new BookRating { BookRatingId = 1, BookId = 1, Username = "juanjo", Stars = 5 },

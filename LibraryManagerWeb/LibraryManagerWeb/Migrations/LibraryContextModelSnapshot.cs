@@ -216,7 +216,7 @@ namespace LibraryManagerWeb.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Stars")
-                        .HasColumnType("decimal(2,4");
+                        .HasColumnType("int");
 
                     b.Property<string>("Username")
                         .HasColumnType("nvarchar(max)");
