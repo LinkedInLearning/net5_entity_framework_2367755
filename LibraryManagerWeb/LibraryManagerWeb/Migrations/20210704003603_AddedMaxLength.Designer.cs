@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryManagerWeb.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    [Migration("20210703234846_ChangedColumnTypes")]
-    partial class ChangedColumnTypes
+    [Migration("20210704003603_AddedMaxLength")]
+    partial class AddedMaxLength
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -79,10 +79,12 @@ namespace LibraryManagerWeb.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(200");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("AuthorId");
 
@@ -123,7 +125,8 @@ namespace LibraryManagerWeb.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.HasKey("BookId");
 
@@ -215,7 +218,7 @@ namespace LibraryManagerWeb.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Stars")
-                        .HasColumnType("decimal(2,4");
+                        .HasColumnType("int");
 
                     b.Property<string>("Username")
                         .HasColumnType("nvarchar(max)");

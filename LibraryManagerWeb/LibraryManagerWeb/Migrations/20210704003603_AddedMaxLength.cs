@@ -23,7 +23,7 @@ namespace LibraryManagerWeb.Migrations
                 maxLength: 100,
                 nullable: true,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(200",
+                oldType: "nvarchar(max)",
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
@@ -52,7 +52,7 @@ namespace LibraryManagerWeb.Migrations
             migrationBuilder.AlterColumn<string>(
                 name: "Name",
                 table: "Authors",
-                type: "nvarchar(200",
+                type: "nvarchar(max)",
                 nullable: true,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(100)",
