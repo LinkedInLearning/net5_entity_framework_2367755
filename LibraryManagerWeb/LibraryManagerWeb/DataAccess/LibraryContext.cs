@@ -48,11 +48,11 @@ namespace LibraryManagerWeb.DataAccess
 				});
 
 			var bookEntity = modelBuilder.Entity<Book>();
-				bookEntity.Ignore(p => p.LoadedDate)
-				.Property(p => p.Title).HasMaxLength(300);
+			bookEntity.Ignore(p => p.LoadedDate)
+			.Property(p => p.Title).HasMaxLength(300);
 
-				bookEntity.HasData(new[]
-			{
+			bookEntity.HasData(new[]
+		{
 				new Book { BookId = 1, AuthorId = 1, Title = "Los ojos del dragón", Sinopsis = "El libro \"Los ojos del dragón\".", PublisherId = 1 },
 				new Book { BookId = 2, AuthorId = 1, Title = "La torre oscura I", Sinopsis = "Es el libro \"La torre oscura I\"." , PublisherId = 1 },
 				new Book { BookId = 3, AuthorId = 2, Title = "Yo, robot", Sinopsis = "Es el libro \"Yo, robot\".\"." , PublisherId = 1 }
@@ -80,6 +80,12 @@ namespace LibraryManagerWeb.DataAccess
 				{
 					opt.HasSchema("dbo");
 				});
+
+
+			modelBuilder.Entity<AuditEntry>()
+				.Property(p => p.TimeSpent)
+				.HasPrecision(20);
+
 			base.OnModelCreating(modelBuilder);
 		}
 

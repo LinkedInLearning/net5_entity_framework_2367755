@@ -14,6 +14,8 @@ namespace LibraryManagerWeb.DataAccess
 
 		public string OPeration { get; set; }
 
+		public decimal TimeSpent { get; set; }
+
 		public string ExtendedDescription { get; set; }
 		
 		public string UserName { get; set; }
