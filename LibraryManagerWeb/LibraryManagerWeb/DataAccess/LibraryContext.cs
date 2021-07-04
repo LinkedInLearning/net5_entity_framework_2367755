@@ -41,6 +41,7 @@ namespace LibraryManagerWeb.DataAccess
 
 			var publisherEntity = modelBuilder.Entity<Publisher>();
 			publisherEntity.Property(p => p.Name).HasColumnName("PublisherName");
+			publisherEntity.Property(p => p.Name).HasComment("El nombre de la editorial");
 
 			publisherEntity.HasData(new[]
 		{
