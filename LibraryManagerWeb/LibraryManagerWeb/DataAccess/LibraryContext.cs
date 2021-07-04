@@ -47,9 +47,11 @@ namespace LibraryManagerWeb.DataAccess
 				new Publisher { PublisherId = 1, Name = "Entre letras" }
 				});
 
-			modelBuilder.Entity<Book>()
-				.Ignore(p => p.LoadedDate)
-				.HasData(new[]
+			var bookEntity = modelBuilder.Entity<Book>();
+				bookEntity.Ignore(p => p.LoadedDate)
+				.Property(p => p.Title).HasMaxLength(300);
+
+				bookEntity.HasData(new[]
 			{
 				new Book { BookId = 1, AuthorId = 1, Title = "Los ojos del dragón", Sinopsis = "El libro \"Los ojos del dragón\".", PublisherId = 1 },
 				new Book { BookId = 2, AuthorId = 1, Title = "La torre oscura I", Sinopsis = "Es el libro \"La torre oscura I\"." , PublisherId = 1 },

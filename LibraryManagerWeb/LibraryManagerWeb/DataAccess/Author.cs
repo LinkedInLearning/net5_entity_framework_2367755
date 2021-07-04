@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -15,9 +16,10 @@ namespace LibraryManagerWeb.DataAccess
 
 		public int AuthorId { get; set; }
 
-		[Column(TypeName = "nvarchar(200")]
+		[MaxLength(100)]
 		public string Name { get; set; }
 
+		[MaxLength(200)]
 		public string LastName { get; set; }
 
 		public List<Book> Books { get; set; } = new List<Book>();
