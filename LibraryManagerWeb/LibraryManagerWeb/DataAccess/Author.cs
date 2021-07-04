@@ -23,6 +23,8 @@ namespace LibraryManagerWeb.DataAccess
 		[MaxLength(200)]
 		public string LastName { get; set; }
 
+		public string AuthorUrl { get; set; }
+
 		public List<Book> Books { get; set; } = new List<Book>();
 
 		[NotMapped]

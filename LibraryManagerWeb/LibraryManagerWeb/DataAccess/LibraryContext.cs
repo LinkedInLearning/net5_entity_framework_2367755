@@ -32,8 +32,12 @@ namespace LibraryManagerWeb.DataAccess
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			modelBuilder.Entity<Author>()
-				.HasData(new[]
+			var authorEntity = modelBuilder.Entity<Author>();
+			authorEntity.HasMany(p => p.Books)
+				.WithOne(b => b.Author)
+				.HasForeignKey(p => p.AuthorUrl)
+				.HasPrincipalKey(p => p.AuthorUrl);
+			authorEntity.HasData(new[]
 			{
 				new Author { AuthorId = 1, Name = "Stephen", LastName = "King" },
 				new Author { AuthorId = 2, Name = "Isaac", LastName = "Asimov" }
@@ -60,9 +64,9 @@ namespace LibraryManagerWeb.DataAccess
 
 			bookEntity.HasData(new[]
 		{
-				new Book { BookId = 1, AuthorId = 1, Title = "Los ojos del dragón", Sinopsis = "El libro \"Los ojos del dragón\".", PublisherId = 1 },
-				new Book { BookId = 2, AuthorId = 1, Title = "La torre oscura I", Sinopsis = "Es el libro \"La torre oscura I\"." , PublisherId = 1 },
-				new Book { BookId = 3, AuthorId = 2, Title = "Yo, robot", Sinopsis = "Es el libro \"Yo, robot\".\"." , PublisherId = 1 }
+				new Book { BookId = 1, AuthorUrl = "stephenking", Title = "Los ojos del dragón", Sinopsis = "El libro \"Los ojos del dragón\".", PublisherId = 1 },
+				new Book { BookId = 2, AuthorUrl= "stephenking", Title = "La torre oscura I", Sinopsis = "Es el libro \"La torre oscura I\"." , PublisherId = 1 },
+				new Book { BookId = 3, AuthorUrl= "asimov", Title = "Yo, robot", Sinopsis = "Es el libro \"Yo, robot\".\"." , PublisherId = 1 }
 				});
 
 			var bookRatingEntity = modelBuilder.Entity<BookRating>();

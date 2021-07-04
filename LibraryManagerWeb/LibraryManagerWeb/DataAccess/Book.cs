@@ -14,7 +14,7 @@ namespace LibraryManagerWeb.DataAccess
 
 		public int BookId { get; set; }
 
-		public int AuthorId { get; set; }
+		public string AuthorUrl { get; set; }
 
 		public Author Author { get; set; }
 
