@@ -82,9 +82,12 @@ namespace LibraryManagerWeb.DataAccess
 				});
 
 
-			modelBuilder.Entity<AuditEntry>()
-				.Property(p => p.TimeSpent)
+			var auditEntryEntity = modelBuilder.Entity<AuditEntry>();
+
+			auditEntryEntity.Property(p => p.TimeSpent)
 				.HasPrecision(20);
+
+			auditEntryEntity.Property(p => p.IpAddress).IsRequired();
 
 			base.OnModelCreating(modelBuilder);
 		}
