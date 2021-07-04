@@ -14,6 +14,7 @@ namespace LibraryManagerWeb.DataAccess
 	public class Author
 	{
 
+		[Key]
 		public int AuthorId { get; set; }
 
 		[MaxLength(100)]

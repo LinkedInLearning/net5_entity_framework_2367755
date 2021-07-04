@@ -49,6 +49,9 @@ namespace LibraryManagerWeb.DataAccess
 				});
 
 			var bookEntity = modelBuilder.Entity<Book>();
+			bookEntity.HasKey(p => p.BookId)
+				.HasName("PK_MyBooks");
+
 			bookEntity.Ignore(p => p.LoadedDate)
 			.Property(p => p.Title).HasMaxLength(300);
 
