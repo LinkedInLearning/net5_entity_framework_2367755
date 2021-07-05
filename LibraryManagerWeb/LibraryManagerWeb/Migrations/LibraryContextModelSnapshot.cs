@@ -82,6 +82,10 @@ namespace LibraryManagerWeb.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("AuthorUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("LastName")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
@@ -101,12 +105,14 @@ namespace LibraryManagerWeb.Migrations
                         new
                         {
                             AuthorId = 1,
+                            AuthorUrl = "stephenking",
                             LastName = "King",
                             Name = "Stephen"
                         },
                         new
                         {
                             AuthorId = 2,
+                            AuthorUrl = "asimov",
                             LastName = "Asimov",
                             Name = "Isaac"
                         });
@@ -119,8 +125,8 @@ namespace LibraryManagerWeb.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AuthorId")
-                        .HasColumnType("int");
+                    b.Property<string>("AuthorUrl")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("PublisherId")
                         .HasColumnType("int");
@@ -133,10 +139,9 @@ namespace LibraryManagerWeb.Migrations
                         .HasColumnType("nvarchar(300)")
                         .UseCollation("SQL_Latin1_General_CP1_CI_AI");
 
-                    b.HasKey("BookId")
-                        .HasName("PK_MyBooks");
+                    b.HasKey("BookId");
 
-                    b.HasIndex("AuthorId");
+                    b.HasIndex("AuthorUrl");
 
                     b.HasIndex("PublisherId");
 
@@ -149,7 +154,7 @@ namespace LibraryManagerWeb.Migrations
                         new
                         {
                             BookId = 1,
-                            AuthorId = 1,
+                            AuthorUrl = "stephenking",
                             PublisherId = 1,
                             Sinopsis = "El libro \"Los ojos del dragón\".",
                             Title = "Los ojos del dragón"
@@ -157,7 +162,7 @@ namespace LibraryManagerWeb.Migrations
                         new
                         {
                             BookId = 2,
-                            AuthorId = 1,
+                            AuthorUrl = "stephenking",
                             PublisherId = 1,
                             Sinopsis = "Es el libro \"La torre oscura I\".",
                             Title = "La torre oscura I"
@@ -165,7 +170,7 @@ namespace LibraryManagerWeb.Migrations
                         new
                         {
                             BookId = 3,
-                            AuthorId = 2,
+                            AuthorUrl = "asimov",
                             PublisherId = 1,
                             Sinopsis = "Es el libro \"Yo, robot\".\".",
                             Title = "Yo, robot"
@@ -394,9 +399,8 @@ namespace LibraryManagerWeb.Migrations
                 {
                     b.HasOne("LibraryManagerWeb.DataAccess.Author", "Author")
                         .WithMany("Books")
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AuthorUrl")
+                        .HasPrincipalKey("AuthorUrl");
 
                     b.HasOne("LibraryManagerWeb.DataAccess.Publisher", "Publisher")
                         .WithMany()
