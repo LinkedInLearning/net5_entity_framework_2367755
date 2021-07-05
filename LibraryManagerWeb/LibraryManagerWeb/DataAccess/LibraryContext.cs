@@ -37,7 +37,11 @@ namespace LibraryManagerWeb.DataAccess
 			auditEntryEntity.Property(p => p.TimeSpent)
 				.HasPrecision(20);
 			auditEntryEntity.Property(p => p.IpAddress).IsRequired();
-			auditEntryEntity.Property<string>("ResearchTicketId").HasMaxLength(20);
+			auditEntryEntity.Property<string>("ResearchTicketId")
+				.HasMaxLength(20);
+			auditEntryEntity.HasIndex("ResearchTicketId")
+				.IsUnique(true)
+				.HasName("UX_AuditEntry_ResearchTicketId");
 
 			var authorEntity = modelBuilder.Entity<Author>();
 			authorEntity.HasMany(p => p.Books)

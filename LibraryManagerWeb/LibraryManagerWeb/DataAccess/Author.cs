@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 namespace LibraryManagerWeb.DataAccess
 {
 	[Comment("Tabla para almacenar los autores que tienen libros en la biblioteca.")]
+	[Index(nameof(Name), nameof(LastName))]
 	public class Author
 	{
 
