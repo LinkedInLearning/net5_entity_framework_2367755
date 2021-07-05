@@ -41,5 +41,7 @@ namespace LibraryManagerWeb.DataAccess
 		public string UserAgent { get; set; }
 
 		public string OperatingSystem { get; set; }
+
+		public Book Book { get; set; }
 	}
 }

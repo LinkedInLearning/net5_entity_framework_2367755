@@ -32,6 +32,13 @@ namespace LibraryManagerWeb.DataAccess
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
+			var auditEntryEntity = modelBuilder.Entity<AuditEntry>();
+
+			auditEntryEntity.Property(p => p.TimeSpent)
+				.HasPrecision(20);
+			auditEntryEntity.Property(p => p.IpAddress).IsRequired();
+			auditEntryEntity.Property<string>("ResearchTicketId").HasMaxLength(20);
+
 			var authorEntity = modelBuilder.Entity<Author>();
 			authorEntity.HasMany(p => p.Books)
 				.WithOne(b => b.Author)
@@ -75,7 +82,11 @@ namespace LibraryManagerWeb.DataAccess
 				new BookRating { BookRatingId = 7, BookId = 2, Username = "Silvia", Stars = 5 },
 				new BookRating { BookRatingId = 8, BookId = 2, Username = "Diego", Stars = 5 }
 				});
-			
+			modelBuilder.Entity<Country>()
+				.HasData(new[] {
+					new Country { CountryId = 1, NativeName = "España", EnglishName = "Spain" }
+					});
+
 			modelBuilder.Entity<ProliphicAuthor>()
 				.ToTable("no-table", t => t.ExcludeFromMigrations())
 				.ToFunction("MostProlificAuthors", opt =>
@@ -96,13 +107,7 @@ namespace LibraryManagerWeb.DataAccess
 				.ToView("MostHighlyRatedBooks", schema: "dbo");
 
 
-			var auditEntryEntity = modelBuilder.Entity<AuditEntry>();
-
-			auditEntryEntity.Property(p => p.TimeSpent)
-				.HasPrecision(20);
-
-			auditEntryEntity.Property(p => p.IpAddress).IsRequired();
-
+			
 			base.OnModelCreating(modelBuilder);
 		}
 

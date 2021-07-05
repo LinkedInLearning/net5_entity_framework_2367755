@@ -4,14 +4,16 @@ using LibraryManagerWeb.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LibraryManagerWeb.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    partial class LibraryContextModelSnapshot : ModelSnapshot
+    [Migration("20210705060357_AddedShadowProperties")]
+    partial class AddedShadowProperties
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -343,14 +345,6 @@ namespace LibraryManagerWeb.Migrations
 
                     b
                         .HasComment("Tabla para guardar los países");
-
-                    b.HasData(
-                        new
-                        {
-                            CountryId = 1,
-                            EnglishName = "Spain",
-                            NativeName = "España"
-                        });
                 });
 
             modelBuilder.Entity("LibraryManagerWeb.DataAccess.ProliphicAuthor", b =>

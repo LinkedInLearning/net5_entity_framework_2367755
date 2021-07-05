@@ -32,8 +32,21 @@ namespace LibraryManagerWeb.Controllers
 
 		public async Task<IActionResult> Index()
 		{
-			var mostHighlyRatedBooks = await _context.MostHighlyRatedBooks.ToListAsync();
-			var proliphicAuthors = await _context.ProliphicAuthors.ToListAsync();
+			var firstBook = await _context.Books.FirstOrDefaultAsync();
+			var newAuditEntry = new AuditEntry
+			{
+				Book = firstBook,
+				Date = DateTime.UtcNow,
+				CountryId = 1,
+				ExtendedDescription = "Prueba de entrada de auditoría",
+				OPeration = "Reseñar un libro",
+				IpAddress = "83.22.121.44",
+				UserName = "JuanjoMontiel"
+			};
+			await _context.AuditEntries.AddAsync(newAuditEntry);
+			_context.Entry(newAuditEntry).Property("ResearchTicketId").CurrentValue = "abcdefghijklmnopqrst";
+			await _context.SaveChangesAsync();
+			var entry = await _context.AuditEntries.SingleOrDefaultAsync(e => EF.Property<string>(e, "ResearchTicketId") == "abcdefghijklmnopqrst");
 
 			return View();
 		}
