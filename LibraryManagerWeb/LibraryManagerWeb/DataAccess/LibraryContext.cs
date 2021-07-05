@@ -39,8 +39,8 @@ namespace LibraryManagerWeb.DataAccess
 				.HasPrincipalKey(p => p.AuthorUrl);
 			authorEntity.HasData(new[]
 			{
-				new Author { AuthorId = 1, Name = "Stephen", LastName = "King" },
-				new Author { AuthorId = 2, Name = "Isaac", LastName = "Asimov" }
+				new Author { AuthorId = 1, Name = "Stephen", LastName = "King", AuthorUrl = "stephenking" },
+				new Author { AuthorId = 2, Name = "Isaac", LastName = "Asimov", AuthorUrl = "asimov" }
 				});
 
 			var publisherEntity = modelBuilder.Entity<Publisher>();
