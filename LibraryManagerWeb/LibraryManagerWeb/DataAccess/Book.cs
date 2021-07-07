@@ -29,6 +29,8 @@ namespace LibraryManagerWeb.DataAccess
 
 		public Publisher Publisher { get; set; }
 
+		public BookImage BookImage { get; set; }
+
 		public List<BookRating> Ratings { get; set; }
 	}
 }

@@ -4,14 +4,16 @@ using LibraryManagerWeb.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LibraryManagerWeb.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    partial class LibraryContextModelSnapshot : ModelSnapshot
+    [Migration("20210707171051_AddedOneToOneRelation")]
+    partial class AddedOneToOneRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -276,16 +278,6 @@ namespace LibraryManagerWeb.Migrations
                         .IsUnique();
 
                     b.ToTable("BookImages");
-
-                    b.HasData(
-                        new
-                        {
-                            BookImageId = 1,
-                            Alt = "Una imagen del libro",
-                            BookId = 1,
-                            Caption = "text",
-                            ImageFilePath = "img.jpg"
-                        });
                 });
 
             modelBuilder.Entity("LibraryManagerWeb.DataAccess.BookRating", b =>
