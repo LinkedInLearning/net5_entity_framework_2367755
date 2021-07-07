@@ -1,0 +1,28 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace LibraryManagerWeb.DataAccess.EntityConfig
+{
+	public class AuthorConfig : IEntityTypeConfiguration<Author>
+	{
+		public void Configure(EntityTypeBuilder<Author> authorBuilder)
+		{
+			authorBuilder.HasMany(p => p.Books)
+				.WithOne(b => b.Author)
+				.HasForeignKey(p => p.AuthorUrl)
+				.HasPrincipalKey(p => p.AuthorUrl);
+			authorBuilder.Property(p => p.AuthorId).ValueGeneratedOnAdd();
+			authorBuilder.Property(p => p.DisplayName).HasComputedColumnSql("Name + ' ' + LastName", stored: true);
+			authorBuilder.HasData(new[]
+			{
+				new Author { AuthorId = 1, Name = "Stephen", LastName = "King", AuthorUrl = "stephenking" },
+				new Author { AuthorId = 2, Name = "Isaac", LastName = "Asimov", AuthorUrl = "asimov" }
+				});
+		}
+	}
+}
