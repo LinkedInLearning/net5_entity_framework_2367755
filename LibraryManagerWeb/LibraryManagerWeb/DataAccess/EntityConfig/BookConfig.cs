@@ -22,6 +22,11 @@ namespace LibraryManagerWeb.DataAccess.EntityConfig
 			bookBuilder.Property(p => p.Title)
 				.UseCollation("SQL_Latin1_General_CP1_CI_AI");
 
+			bookBuilder.HasOne(p => p.Publisher)
+				.WithMany(p => p.Books)
+				.IsRequired();
+
+
 			bookBuilder.HasData(new[]
 			{
 				new { BookId = 1, AuthorUrl = "stephenking", Title = "Los ojos del dragón", Sinopsis = "El libro \"Los ojos del dragón\".", PublisherId = 1, CreationDateUtc = new DateTime(2021, 1, 1, 0, 0, 0) },

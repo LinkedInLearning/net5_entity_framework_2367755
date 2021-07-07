@@ -19,10 +19,11 @@ namespace LibraryManagerWeb.DataAccess.EntityConfig
 			authorBuilder.Ignore(p => p.LoadedDate);
 			authorBuilder.Property(p => p.AuthorId).ValueGeneratedOnAdd();
 			authorBuilder.Property(p => p.DisplayName).HasComputedColumnSql("Name + ' ' + LastName", stored: true);
-			authorBuilder.HasMany(p => p.Books)
+			authorBuilder.HasMany<Book>()
 				.WithOne(b => b.Author)
 				.HasForeignKey(p => p.AuthorUrl)
-				.HasPrincipalKey(p => p.AuthorUrl);
+				.HasPrincipalKey(p => p.AuthorUrl)
+				.IsRequired();
 
 			authorBuilder.HasData(new[]
 			{
