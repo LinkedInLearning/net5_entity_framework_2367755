@@ -29,6 +29,8 @@ namespace LibraryManagerWeb.DataAccess
 
 		public DbSet<ProlificAuthor> ProliphicAuthors { get; set; }
 
+		public DbSet<Tag> Tags { get; set; }
+
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{

@@ -25,6 +25,9 @@ namespace LibraryManagerWeb.DataAccess.EntityConfig
 			bookBuilder.HasOne(p => p.Publisher)
 				.WithMany(p => p.Books)
 				.IsRequired();
+			bookBuilder.HasMany(p => p.Tags)
+							.WithMany(p => p.Books);
+
 
 			bookBuilder.HasData(new[]
 			{

@@ -31,6 +31,8 @@ namespace LibraryManagerWeb.DataAccess
 
 		public BookImage BookImage { get; set; }
 
+		public List<Tag> Tags { get; set; }
+
 		public List<BookRating> Ratings { get; set; }
 	}
 }
