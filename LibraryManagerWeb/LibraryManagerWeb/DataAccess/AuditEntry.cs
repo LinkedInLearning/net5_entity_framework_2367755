@@ -10,12 +10,10 @@ namespace LibraryManagerWeb.DataAccess
 	public class AuditEntry
 	{
 
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int AuditEntryId { get; set; }
 
 		public DateTime Date { get; set; }
 
-		[Required]
 		public string OPeration { get; set; }
 
 		public decimal TimeSpent { get; set; }

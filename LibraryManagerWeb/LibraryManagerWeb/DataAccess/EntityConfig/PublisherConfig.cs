@@ -12,6 +12,7 @@ namespace LibraryManagerWeb.DataAccess.EntityConfig
 	{
 		public void Configure(EntityTypeBuilder<Publisher> publisherBuilder)
 		{
+			publisherBuilder.HasComment("Editoriales");
 			publisherBuilder.Property(p => p.Name).HasColumnName("PublisherName");
 			publisherBuilder.Property(p => p.Name).HasComment("El nombre de la editorial");
 

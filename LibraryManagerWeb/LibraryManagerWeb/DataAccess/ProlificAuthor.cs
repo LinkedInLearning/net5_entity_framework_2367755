@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace LibraryManagerWeb.DataAccess
 {
-	[Keyless]
-	public class ProliphicAuthor
+	public class ProlificAuthor
 	{
-
 		public string Name { get; set; }
 
 		public string LastName { get; set; }

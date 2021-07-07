@@ -12,6 +12,7 @@ namespace LibraryManagerWeb.DataAccess.EntityConfig
 	{
 		public void Configure(EntityTypeBuilder<RatedBook> ratedBookBuilder)
 		{
+			ratedBookBuilder.HasNoKey();
 			ratedBookBuilder.ToView("MostHighlyRatedBooks", schema: "dbo");
 		}
 	}

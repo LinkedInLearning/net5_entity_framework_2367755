@@ -11,17 +11,12 @@ using System.Threading.Tasks;
 namespace LibraryManagerWeb.DataAccess
 {
 	[Comment("Tabla para almacenar los autores que tienen libros en la biblioteca.")]
-	[Index(nameof(Name), nameof(LastName))]
 	public class Author
 	{
-
-		[Key]
 		public int AuthorId { get; set; }
 
-		[MaxLength(100)]
 		public string Name { get; set; }
 
-		[MaxLength(200)]
 		public string LastName { get; set; }
 
 		public string DisplayName { get; set; }
@@ -30,8 +25,6 @@ namespace LibraryManagerWeb.DataAccess
 
 		public List<Book> Books { get; set; } = new List<Book>();
 
-		[NotMapped]
 		public DateTime LoadedDate { get; set; }
-
 	}
 }

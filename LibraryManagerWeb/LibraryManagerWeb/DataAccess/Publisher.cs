@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace LibraryManagerWeb.DataAccess
 {
-	[Comment("Editoriales")]
 	public class Publisher
 	{
 

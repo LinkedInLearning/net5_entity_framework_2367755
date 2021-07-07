@@ -27,93 +27,15 @@ namespace LibraryManagerWeb.DataAccess
 
 		public DbSet<RatedBook> MostHighlyRatedBooks { get; set; }
 
-		public DbSet<ProliphicAuthor> ProliphicAuthors { get; set; }
+		public DbSet<ProlificAuthor> ProliphicAuthors { get; set; }
 
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			var auditEntryEntity = modelBuilder.Entity<AuditEntry>();
-
-			auditEntryEntity.Property(p => p.TimeSpent)
-				.HasPrecision(20);
-			auditEntryEntity.Property(p => p.IpAddress).IsRequired();
-			auditEntryEntity.Property<string>("ResearchTicketId")
-				.HasMaxLength(20);
-			auditEntryEntity.HasIndex("ResearchTicketId")
-				.IsUnique(true)
-				.HasName("UX_AuditEntry_ResearchTicketId");
-
-			var authorEntity = modelBuilder.Entity<Author>();
-			authorEntity.HasMany(p => p.Books)
-				.WithOne(b => b.Author)
-				.HasForeignKey(p => p.AuthorUrl)
-				.HasPrincipalKey(p => p.AuthorUrl);
-			authorEntity.Property(p => p.AuthorId).ValueGeneratedOnAdd();
-			authorEntity.Property(p => p.DisplayName).HasComputedColumnSql("Name + ' ' + LastName", stored: true);
-			authorEntity.HasData(new[]
-			{
-				new Author { AuthorId = 1, Name = "Stephen", LastName = "King", AuthorUrl = "stephenking" },
-				new Author { AuthorId = 2, Name = "Isaac", LastName = "Asimov", AuthorUrl = "asimov" }
-				});
-
-			var bookEntity = modelBuilder.Entity<Book>();
-			bookEntity.HasKey(p => p.BookId);
-
-			bookEntity.Property(p => p.CreationDateUtc).HasDefaultValueSql("getutcdate()");
-			bookEntity.Ignore(p => p.LoadedDate)
-			.Property(p => p.Title).HasMaxLength(300);
-
-			bookEntity.Property(p => p.Title)
-				.UseCollation("SQL_Latin1_General_CP1_CI_AI");
-
-			bookEntity.HasData(new[]
-			{
-				new Book { BookId = 1, AuthorUrl = "stephenking", Title = "Los ojos del dragón", Sinopsis = "El libro \"Los ojos del dragón\".", PublisherId = 1, CreationDateUtc = new DateTime(2021, 1, 1, 0, 0, 0) },
-				new Book { BookId = 2, AuthorUrl= "stephenking", Title = "La torre oscura I", Sinopsis = "Es el libro \"La torre oscura I\"." , PublisherId = 1 , CreationDateUtc = new DateTime(2021, 1, 1, 0, 0, 0) },
-				new Book { BookId = 3, AuthorUrl= "asimov", Title = "Yo, robot", Sinopsis = "Es el libro \"Yo, robot\".\"." , PublisherId = 1 , CreationDateUtc = new DateTime(2021, 1, 1, 0, 0, 0) }
-				});
-
-			var bookRatingEntity = modelBuilder.Entity<BookRating>();
-			bookRatingEntity.Property(p => p.Stars).HasDefaultValue(3);
-			bookRatingEntity.HasData(new[]
-			{
-				new BookRating { BookRatingId = 1, BookId = 1, Username = "juanjo", Stars = 5 },
-				new BookRating { BookRatingId = 2, BookId = 1, Username = "Lola", Stars = 3 },
-				new BookRating { BookRatingId = 3, BookId = 1, Username = "Silvia", Stars = 4 },
-				new BookRating { BookRatingId = 4, BookId = 1, Username = "Diego", Stars = 2 },
-				new BookRating { BookRatingId = 5, BookId = 2, Username = "juanjo", Stars = 4 },
-				new BookRating { BookRatingId = 6, BookId = 2, Username = "Lola", Stars = 2 },
-				new BookRating { BookRatingId = 7, BookId = 2, Username = "Silvia", Stars = 5 },
-				new BookRating { BookRatingId = 8, BookId = 2, Username = "Diego", Stars = 5 }
-				});
-			modelBuilder.Entity<Country>()
-				.HasData(new[] {
-					new Country { CountryId = 1, NativeName = "España", EnglishName = "Spain" }
-					});
-
-			modelBuilder.Entity<ProliphicAuthor>()
-				.ToTable("no-table", t => t.ExcludeFromMigrations())
-				.ToFunction("MostProlificAuthors", opt =>
-				{
-					opt.HasSchema("dbo");
-				});
-
-			var publisherEntity = modelBuilder.Entity<Publisher>();
-			publisherEntity.Property(p => p.Name).HasColumnName("PublisherName");
-			publisherEntity.Property(p => p.Name).HasComment("El nombre de la editorial");
-
-			publisherEntity.HasData(new[]
-			{
-				new Publisher { PublisherId = 1, Name = "Entre letras" }
-				});
-
-			modelBuilder.Entity<RatedBook>()
-				.ToView("MostHighlyRatedBooks", schema: "dbo");
-
-
-			
+			modelBuilder.ApplyConfigurationsFromAssembly(typeof(LibraryContext).Assembly);
 			base.OnModelCreating(modelBuilder);
 		}
+
 
 		public LibraryContext(DbContextOptions<LibraryContext> options)
 			: base(options)

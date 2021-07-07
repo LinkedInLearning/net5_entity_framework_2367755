@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace LibraryManagerWeb.DataAccess
 {
-	[Comment("Tabla para almacenar los libros existentes en esta biblioteca.")]
 	public class Book
 	{
 
@@ -33,6 +32,5 @@ namespace LibraryManagerWeb.DataAccess
 		public Publisher Publisher { get; set; }
 
 		public List<BookRating> Ratings { get; set; }
-
 	}
 }

@@ -12,6 +12,7 @@ namespace LibraryManagerWeb.DataAccess.EntityConfig
 	{
 		public void Configure(EntityTypeBuilder<Country> countryBuilder)
 		{
+			countryBuilder.HasComment("Tabla para guardar los países");
 			countryBuilder.HasData(new[] {
 				new Country { CountryId = 1, NativeName = "España", EnglishName = "Spain" }
 			});

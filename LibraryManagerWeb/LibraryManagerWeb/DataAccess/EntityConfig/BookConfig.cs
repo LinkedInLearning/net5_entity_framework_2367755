@@ -12,6 +12,7 @@ namespace LibraryManagerWeb.DataAccess.EntityConfig
 	{
 		public void Configure(EntityTypeBuilder<Book> bookBuilder)
 		{
+			bookBuilder.HasComment("Tabla para almacenar los libros existentes en esta biblioteca.");
 			bookBuilder.HasKey(p => p.BookId);
 
 			bookBuilder.Property(p => p.CreationDateUtc).HasDefaultValueSql("getutcdate()");

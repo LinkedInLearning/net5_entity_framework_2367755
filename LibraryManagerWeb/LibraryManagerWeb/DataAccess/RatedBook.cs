@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace LibraryManagerWeb.DataAccess
 {
-	[Keyless]
 	public class RatedBook
 	{
 
@@ -20,6 +19,5 @@ namespace LibraryManagerWeb.DataAccess
 		public string LastName { get; set; }
 
 		public double Stars { get; set; }
-
 	}
 }

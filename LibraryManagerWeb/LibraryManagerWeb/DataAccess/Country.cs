@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace LibraryManagerWeb.DataAccess
 {
-	[Comment("Tabla para guardar los países")]
 	public class Country
 	{
 

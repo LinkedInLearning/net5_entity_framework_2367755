@@ -12,6 +12,7 @@ namespace LibraryManagerWeb.DataAccess.EntityConfig
 	{
 		public void Configure(EntityTypeBuilder<ProlificAuthor> builder)
 		{
+			builder.HasNoKey();
 			builder.ToTable("no-table", t => t.ExcludeFromMigrations())
 				.ToFunction("MostProlificAuthors", opt =>
 				{

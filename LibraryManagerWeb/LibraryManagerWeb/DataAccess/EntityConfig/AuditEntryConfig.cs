@@ -14,12 +14,13 @@ namespace LibraryManagerWeb.DataAccess.EntityConfig
 		{
 			auditEntryBuilder.Property(p => p.TimeSpent)
 				.HasPrecision(20);
+			auditEntryBuilder.Property(p => p.OPeration).IsRequired();
 			auditEntryBuilder.Property(p => p.IpAddress).IsRequired();
 			auditEntryBuilder.Property<string>("ResearchTicketId")
 				.HasMaxLength(20);
 			auditEntryBuilder.HasIndex("ResearchTicketId")
 				.IsUnique(true)
-				.HasName("UX_AuditEntry_ResearchTicketId");
+				.HasDatabaseName("UX_AuditEntry_ResearchTicketId");
 		}
 	}
 }
