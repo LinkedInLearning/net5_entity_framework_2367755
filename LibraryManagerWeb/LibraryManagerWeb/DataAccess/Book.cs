@@ -27,8 +27,6 @@ namespace LibraryManagerWeb.DataAccess
 
 		public List<BookFile> BookFiles { get; set; }
 
-		public int PublisherId { get; set; }
-
 		public Publisher Publisher { get; set; }
 
 		public List<BookRating> Ratings { get; set; }
