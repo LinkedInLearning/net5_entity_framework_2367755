@@ -30,7 +30,7 @@ namespace LibraryManagerWeb
 			services.AddControllersWithViews();
 			services.AddDbContext<LibraryContext>(options =>
 			{
-				options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+				options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), o => o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
 				options.EnableSensitiveDataLogging(true);
 			});
 			
