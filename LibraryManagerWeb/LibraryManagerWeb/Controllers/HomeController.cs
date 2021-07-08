@@ -32,6 +32,10 @@ namespace LibraryManagerWeb.Controllers
 
 		public async Task<IActionResult> Index()
 		{
+			var authors = await _context.Authors.OrderBy(a => a.Name).ThenBy(a => a.LastName).ToListAsync();
+			var first = await _context.Authors.FirstOrDefaultAsync(a => a.Name.Equals("Stephen"));
+
+
 			return View();
 		}
 
