@@ -12,6 +12,6 @@ namespace LibraryManagerWeb.DataAccess
 
 		public string Value { get; set; }
 
-		public List<Book> Books { get; set; }
+		public virtual List<Book> Books { get; set; }
 	}
 }

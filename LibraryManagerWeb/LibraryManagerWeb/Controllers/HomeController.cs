@@ -38,6 +38,8 @@ namespace LibraryManagerWeb.Controllers
 					.Where(bf => bf.Format.Name == "RTF"))
 				.ThenInclude(bf => bf.Format).ToListAsync();
 
+			var author = books.First().Author;
+
 
 			return View();
 		}

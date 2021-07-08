@@ -11,7 +11,7 @@ namespace LibraryManagerWeb.DataAccess
 
 		public int BookId { get; set; }
 
-		public Book Book { get; set; }
+		public virtual Book Book { get; set; }
 
 		public string Username { get; set; }
 		

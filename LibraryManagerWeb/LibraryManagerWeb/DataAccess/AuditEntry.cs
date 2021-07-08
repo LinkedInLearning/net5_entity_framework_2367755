@@ -26,7 +26,7 @@ namespace LibraryManagerWeb.DataAccess
 
 		public int CountryId { get; set; }
 
-		public Country Country { get; set; }
+		public virtual Country Country { get; set; }
 
 		public string City { get; set; }
 
@@ -40,6 +40,6 @@ namespace LibraryManagerWeb.DataAccess
 
 		public string OperatingSystem { get; set; }
 
-		public Book Book { get; set; }
+		public virtual Book Book { get; set; }
 	}
 }

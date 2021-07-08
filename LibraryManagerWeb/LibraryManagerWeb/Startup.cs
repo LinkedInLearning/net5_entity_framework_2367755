@@ -31,6 +31,7 @@ namespace LibraryManagerWeb
 			services.AddDbContext<LibraryContext>(options =>
 			{
 				options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+				options.UseLazyLoadingProxies();
 				options.EnableSensitiveDataLogging(true);
 			});
 			

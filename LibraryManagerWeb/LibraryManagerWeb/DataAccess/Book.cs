@@ -15,7 +15,7 @@ namespace LibraryManagerWeb.DataAccess
 
 		public string AuthorUrl { get; set; }
 
-		public Author Author { get; set; }
+		public virtual Author Author { get; set; }
 
 		public string Title { get; set; }
 
@@ -25,17 +25,17 @@ namespace LibraryManagerWeb.DataAccess
 
 		public DateTime LoadedDate { get; set; }
 
-		public List<BookFile> BookFiles { get; set; }
+		public virtual List<BookFile> BookFiles { get; set; }
 
 		public int PublisherId { get; set; }
 
-		public Publisher Publisher { get; set; }
+		public virtual Publisher Publisher { get; set; }
 
-		public BookImage BookImage { get; set; }
+		public virtual BookImage BookImage { get; set; }
 
-		public List<Tag> Tags { get; set; }
+		public virtual List<Tag> Tags { get; set; }
 
-		public List<BookRating> Ratings { get; set; }
+		public virtual List<BookRating> Ratings { get; set; }
 	
 	}
 }

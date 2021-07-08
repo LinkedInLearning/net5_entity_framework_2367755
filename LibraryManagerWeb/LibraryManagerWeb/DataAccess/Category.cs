@@ -16,9 +16,9 @@ namespace LibraryManagerWeb.DataAccess
 
 		public int? ParentCategoryId { get; set; }
 
-		public Category Parent { get; set; }
+		public virtual Category Parent { get; set; }
 
-		public List<Category> Children { get; set; }
+		public virtual List<Category> Children { get; set; }
 
 	}
 }
