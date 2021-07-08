@@ -37,6 +37,8 @@ namespace LibraryManagerWeb.Controllers
 
 			var booksWithAuthors = await _context.Books.Include(b => b.Author).ToListAsync();
 
+			var booksWithAuthorsWithoutFilter = await _context.Books.Include(b => b.Author).IgnoreQueryFilters().ToListAsync();
+
 			return View();
 		}
 
