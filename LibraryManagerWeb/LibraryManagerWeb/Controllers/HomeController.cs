@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-using LibraryManagerWeb.DataAccess;
+using LibraryManager.Data;
 using LibraryManagerWeb.Models;
 
 using Microsoft.AspNetCore.Mvc;

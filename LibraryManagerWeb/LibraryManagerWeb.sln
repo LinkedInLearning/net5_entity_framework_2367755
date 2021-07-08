@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31410.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryManagerWeb", "LibraryManagerWeb\LibraryManagerWeb.csproj", "{09121393-5CD3-4835-AB8A-A6C858B25841}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryManagerWeb", "LibraryManagerWeb\LibraryManagerWeb.csproj", "{09121393-5CD3-4835-AB8A-A6C858B25841}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryManager.Data", "LibraryManager.Data\LibraryManager.Data.csproj", "{0180F2D0-2E58-4A2B-89F6-D5F27E1E3F2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryManagerDbInitializer", "LibraryManagerDbInitializer\LibraryManagerDbInitializer.csproj", "{16FD833D-9720-46D0-8B85-66E344AC826D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{09121393-5CD3-4835-AB8A-A6C858B25841}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09121393-5CD3-4835-AB8A-A6C858B25841}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09121393-5CD3-4835-AB8A-A6C858B25841}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0180F2D0-2E58-4A2B-89F6-D5F27E1E3F2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0180F2D0-2E58-4A2B-89F6-D5F27E1E3F2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0180F2D0-2E58-4A2B-89F6-D5F27E1E3F2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0180F2D0-2E58-4A2B-89F6-D5F27E1E3F2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16FD833D-9720-46D0-8B85-66E344AC826D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16FD833D-9720-46D0-8B85-66E344AC826D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16FD833D-9720-46D0-8B85-66E344AC826D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16FD833D-9720-46D0-8B85-66E344AC826D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
