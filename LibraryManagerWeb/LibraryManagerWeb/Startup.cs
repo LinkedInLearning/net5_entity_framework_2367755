@@ -32,6 +32,7 @@ namespace LibraryManagerWeb
 			{
 				options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
 				options.EnableSensitiveDataLogging(true);
+				options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 			});
 			
 			services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

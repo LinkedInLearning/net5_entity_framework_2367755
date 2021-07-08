@@ -33,11 +33,12 @@ namespace LibraryManagerWeb.Controllers
 
 		public async Task<IActionResult> Index()
 		{
-			var books = await _context.Books.ToListAsync();
+			var books = await _context.Books.AsTracking().ToListAsync();
 
-			var book = await _context.Books.FirstOrDefaultAsync(b => b.Title == "Los ojos del dragón");
-			book.Title = "prueba";
+			books.First().Title = "prueba";
+			await _context.SaveChangesAsync();
 
+			var book = await _context.Books.FirstAsync();
 
 			return View();
 		}
