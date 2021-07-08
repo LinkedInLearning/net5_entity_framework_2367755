@@ -41,6 +41,8 @@ namespace LibraryManagerWeb.Controllers
 
 			var bookWithInterpolatedParams = await _context.Books.FromSqlInterpolated($"select * from Books where Title={title}").FirstOrDefaultAsync();
 
+			var booksWithLinq = await _context.Books.FromSqlRaw("select * from Books").Include("Author").OrderByDescending(b => b.Title).ThenBy(b => b.Author.Name).ToListAsync();
+
 			return View();
 		}
 
