@@ -95,19 +95,18 @@ namespace LibraryManagerWeb.Controllers
 					}
 				}
 			};
-			
+
 			await _context.Authors.AddAsync(authorWithRelated);
-			try
-			{
-				await _context.SaveChangesAsync();
-			}
-			catch (Exception ex)
-			{
-			}
+			await _context.SaveChangesAsync();
 
+			var stephen = await _context.Authors.FirstOrDefaultAsync(a => a.Name == "Stephen");
+			var book = authorWithRelated.Books[0];
+			book.Author = stephen;
+			await _context.SaveChangesAsync();
 
-
-				return View();
+			book.Tags.Remove(book.Tags[0]);
+			await _context.SaveChangesAsync();
+			return View();
 		}
 
 		public IActionResult Privacy()
