@@ -33,11 +33,13 @@ namespace LibraryManagerWeb.Controllers
 
 		public async Task<IActionResult> Index()
 		{
-			var books = await _context.Books
-				.Include(b => b.BookFiles
-					.Where(bf => bf.Format.Name == "RTF"))
-				.ThenInclude(bf => bf.Format).ToListAsync();
+			var books = await _context.Books.FromSqlRaw("select * from Books").ToListAsync();
 
+			var title = "Los ojos del dragón";
+
+			var book = await _context.Books.FromSqlRaw("select * from books where Title={0}", title).FirstOrDefaultAsync();
+
+			var bookWithInterpolatedParams = await _context.Books.FromSqlInterpolated($"select * from Books where Title={title}").FirstOrDefaultAsync();
 
 			return View();
 		}
