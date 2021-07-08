@@ -23,7 +23,9 @@ namespace LibraryManagerWeb.DataAccess
 
 		public string AuthorUrl { get; set; }
 
-
 		public DateTime LoadedDate { get; set; }
+
+		public List<Book> Books { get; set; }
+
 	}
 }

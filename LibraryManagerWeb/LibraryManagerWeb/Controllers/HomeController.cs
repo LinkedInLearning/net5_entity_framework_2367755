@@ -33,17 +33,81 @@ namespace LibraryManagerWeb.Controllers
 
 		public async Task<IActionResult> Index()
 		{
-			var books = await _context.Books.FromSqlRaw("select * from Books").ToListAsync();
+			var authorWithRelated = new Author
+			{
+				Name = "Dan",
+				LastName = "Simmons",
+				AuthorUrl = "dan-simmons",
+				Books = new List<Book>
+				{
+					new Book
+					{
+						Title = "Los cantos de Hyperion",
+						BookFiles = new List<BookFile>
+						{
+							new BookFile
+							{
+								Format = new BookFormat
+								{
+									Name = "Daisy"
+								},
+								InternalFilePath = "los-cantos-de-hyperion.zip"
+							}
+						},
+						BookImage = new BookImage
+						{
+							Caption = "Portada de Los cantos de Hyperion",
+							Alt = "En la portada aparece un dibujo muy bonito.",
 
-			var title = "Los ojos del dragón";
+							ImageFilePath = "los-cantos-de-hyperion.jpg"
+						},
+						Publisher = new Publisher
+						{
+							Name = "The best Scifi"
+						},
+						Ratings = new List<BookRating>
+						{
+							new BookRating
+							{
+								Stars = 5,
+								Username = "Juanjo"
+							}
+						},
+						Sinopsis = "Es la sinopsis de Los cantos de Hyperion.",
+						Tags = new List<Tag>
+						{
+							new Tag
+							{
+								Value = "cienci ficción" },
+							new Tag
+							{
+								Value = "futurista"
+							},
+							new Tag
+							{
+								Value = "espacio"
+							},
+							new Tag
+							{
+								Value = "inteligencia artificial"
+							}
+						}
+					}
+				}
+			};
+			
+			await _context.Authors.AddAsync(authorWithRelated);
+			try
+			{
+				await _context.SaveChangesAsync();
+			}
+			catch (Exception ex)
+			{
+			}
 
-			var book = await _context.Books.FromSqlRaw("select * from books where Title={0}", title).FirstOrDefaultAsync();
 
-			var bookWithInterpolatedParams = await _context.Books.FromSqlInterpolated($"select * from Books where Title={title}").FirstOrDefaultAsync();
 
-			var booksWithLinq = await _context.Books.FromSqlRaw("select * from Books").Include("Author").OrderByDescending(b => b.Title).ThenBy(b => b.Author.Name).ToListAsync();
-
-			return View();
+				return View();
 		}
 
 		public IActionResult Privacy()
