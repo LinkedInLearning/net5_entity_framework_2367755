@@ -25,5 +25,10 @@ namespace LibraryManagerWeb.DataAccess
 
 
 		public DateTime LoadedDate { get; set; }
+
+		public bool IsDeleted { get; set; }
+
+		public List<Book> Books { get; set; }
+
 	}
 }

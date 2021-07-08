@@ -33,11 +33,9 @@ namespace LibraryManagerWeb.Controllers
 
 		public async Task<IActionResult> Index()
 		{
-			var books = await _context.Books
-				.Include(b => b.BookFiles
-					.Where(bf => bf.Format.Name == "RTF"))
-				.ThenInclude(bf => bf.Format).ToListAsync();
+			var books = await _context.Books.ToListAsync();
 
+			var booksWithAuthors = await _context.Books.Include(b => b.Author).ToListAsync();
 
 			return View();
 		}

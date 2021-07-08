@@ -14,12 +14,13 @@ namespace LibraryManagerWeb.DataAccess.EntityConfig
 		{
 			authorBuilder.HasIndex(p => new { p.Name, p.LastName });
 			authorBuilder.HasKey(p => p.AuthorId);
+			authorBuilder.HasQueryFilter(a => !a.IsDeleted);
 			authorBuilder.Property(p => p.Name).HasMaxLength(100);
 			authorBuilder.Property(p => p.LastName).HasMaxLength(200);
 			authorBuilder.Ignore(p => p.LoadedDate);
 			authorBuilder.Property(p => p.AuthorId).ValueGeneratedOnAdd();
 			authorBuilder.Property(p => p.DisplayName).HasComputedColumnSql("Name + ' ' + LastName", stored: true);
-			authorBuilder.HasMany<Book>()
+			authorBuilder.HasMany(p => p.Books)
 				.WithOne(b => b.Author)
 				.HasForeignKey(p => p.AuthorUrl)
 				.HasPrincipalKey(p => p.AuthorUrl)
@@ -28,7 +29,7 @@ namespace LibraryManagerWeb.DataAccess.EntityConfig
 			authorBuilder.HasData(new[]
 			{
 				new Author { AuthorId = 1, Name = "Stephen", LastName = "King", AuthorUrl = "stephenking" },
-				new Author { AuthorId = 2, Name = "Isaac", LastName = "Asimov", AuthorUrl = "asimov" }
+				new Author { AuthorId = 2, Name = "Isaac", LastName = "Asimov", AuthorUrl = "asimov", IsDeleted = true }
 				});
 		}
 	}

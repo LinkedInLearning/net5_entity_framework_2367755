@@ -29,6 +29,7 @@ namespace LibraryManagerWeb.DataAccess.EntityConfig
 							.WithMany(p => p.Books);
 
 
+
 			bookBuilder.HasData(new[]
 			{
 				new Book { BookId = 1, AuthorUrl = "stephenking", Title = "Los ojos del dragón", Sinopsis = "El libro \"Los ojos del dragón\".", PublisherId = 1, CreationDateUtc = new DateTime(2021, 1, 1, 0, 0, 0) },
