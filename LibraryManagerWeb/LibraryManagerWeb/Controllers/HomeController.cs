@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 
 using LibraryManagerWeb.DataAccess;
+using LibraryManagerWeb.Extensions;
 using LibraryManagerWeb.Models;
 
 using Microsoft.AspNetCore.Mvc;
@@ -32,8 +33,10 @@ namespace LibraryManagerWeb.Controllers
 
 		public async Task<IActionResult> Index()
 		{
-			var authors = await _context.Authors.OrderBy(a => a.Name).ThenBy(a => a.LastName).ToListAsync();
-			var first = await _context.Authors.FirstOrDefaultAsync(a => a.Name.Equals("Stephen"));
+			var books = await _context.Books
+				.Include(b => b.BookFiles
+					.Where(bf => bf.Format.Name == "RTF"))
+				.ThenInclude(bf => bf.Format).ToListAsync();
 
 
 			return View();

@@ -27,6 +27,8 @@ namespace LibraryManagerWeb.DataAccess
 
 		public List<BookFile> BookFiles { get; set; }
 
+		public int PublisherId { get; set; }
+
 		public Publisher Publisher { get; set; }
 
 		public BookImage BookImage { get; set; }
@@ -34,5 +36,6 @@ namespace LibraryManagerWeb.DataAccess
 		public List<Tag> Tags { get; set; }
 
 		public List<BookRating> Ratings { get; set; }
+	
 	}
 }

@@ -9,7 +9,7 @@ namespace LibraryManagerWeb.DataAccess
 	public class BookFormat
 	{
 
-		public int BookformatId { get; set; }
+		public int BookFormatId { get; set; }
 
 		public string Name { get; set; }
 	}

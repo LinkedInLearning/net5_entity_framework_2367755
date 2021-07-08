@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryManagerWeb.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    [Migration("20210708044802_AddViewAndFunction")]
-    partial class AddViewAndFunction
+    [Migration("20210708064408_AddedMoreData")]
+    partial class AddedMoreData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -248,11 +248,55 @@ namespace LibraryManagerWeb.Migrations
                     b.HasIndex("BookId");
 
                     b.ToTable("BookFiles");
+
+                    b.HasData(
+                        new
+                        {
+                            BookFileId = 1,
+                            BookFormatId = 1,
+                            BookId = 1,
+                            InternalFilePath = "ojos.rtf"
+                        },
+                        new
+                        {
+                            BookFileId = 2,
+                            BookFormatId = 2,
+                            BookId = 1,
+                            InternalFilePath = "ojos.docx"
+                        },
+                        new
+                        {
+                            BookFileId = 3,
+                            BookFormatId = 3,
+                            BookId = 1,
+                            InternalFilePath = "ojos.epub"
+                        },
+                        new
+                        {
+                            BookFileId = 4,
+                            BookFormatId = 1,
+                            BookId = 2,
+                            InternalFilePath = "torre.rtf"
+                        },
+                        new
+                        {
+                            BookFileId = 5,
+                            BookFormatId = 2,
+                            BookId = 2,
+                            InternalFilePath = "torre.docx"
+                        },
+                        new
+                        {
+                            BookFileId = 6,
+                            BookFormatId = 3,
+                            BookId = 2,
+                            InternalFilePath = "torre.epub"
+                        });
                 });
 
             modelBuilder.Entity("LibraryManagerWeb.DataAccess.BookFormat", b =>
                 {
-                    b.Property<int>("BookformatId")
+                    b.Property<int>("BookFormatId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -260,9 +304,26 @@ namespace LibraryManagerWeb.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("BookformatId");
+                    b.HasKey("BookFormatId");
 
                     b.ToTable("BookFormats");
+
+                    b.HasData(
+                        new
+                        {
+                            BookFormatId = 1,
+                            Name = "RTF"
+                        },
+                        new
+                        {
+                            BookFormatId = 2,
+                            Name = "Microsoft Word"
+                        },
+                        new
+                        {
+                            BookFormatId = 3,
+                            Name = "Epub"
+                        });
                 });
 
             modelBuilder.Entity("LibraryManagerWeb.DataAccess.BookImage", b =>
