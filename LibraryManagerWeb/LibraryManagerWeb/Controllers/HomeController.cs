@@ -34,10 +34,11 @@ namespace LibraryManagerWeb.Controllers
 		public async Task<IActionResult> Index()
 		{
 			var stephen = await _context.Authors.FirstAsync(a => a.Name == "Stephen" && a.LastName == "King");
-			_context.Authors.Remove(stephen);
+			 _context.Authors.Remove(stephen);
 			await _context.SaveChangesAsync();
+			var books = await _context.Books.ToListAsync();
 
-			var guijarro = await _context.Books.SingleAsync(b => b.Title == "Un guijarro en el cielo");
+			var guijarro = await _context.Books.Include(b => b.BookImage).SingleAsync(b => b.Title == "Un guijarro en el cielo");
 			guijarro.BookImage = null;
 			await _context.SaveChangesAsync();
 
