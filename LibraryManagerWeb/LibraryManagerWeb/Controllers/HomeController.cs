@@ -33,15 +33,17 @@ namespace LibraryManagerWeb.Controllers
 
 		public async Task<IActionResult> Index()
 		{
-			var books = await _context.Books.FromSqlRaw("select * from Books").ToListAsync();
+			var newAuthor = new Author { Name = "Dan", LastName = "Simmons", AuthorUrl = "dan-simmons" };
+			await _context.Authors.AddAsync(newAuthor);
+			await _context.SaveChangesAsync();
 
-			var title = "Los ojos del dragón";
+			var book = await _context.Books.FirstOrDefaultAsync(b => b.Title == "Los ojos del dragón");
+			book.Sinopsis = "Cambio de la sinopsis.";
+			await _context.SaveChangesAsync();
 
-			var book = await _context.Books.FromSqlRaw("select * from books where Title={0}", title).FirstOrDefaultAsync();
-
-			var bookWithInterpolatedParams = await _context.Books.FromSqlInterpolated($"select * from Books where Title={title}").FirstOrDefaultAsync();
-
-			var booksWithLinq = await _context.Books.FromSqlRaw("select * from Books").Include("Author").OrderByDescending(b => b.Title).ThenBy(b => b.Author.Name).ToListAsync();
+			var otherBook = _context.Books.FirstOrDefault(b => b.Title.Contains("oscura"));
+			_context.Books.Remove(otherBook);
+			await _context.SaveChangesAsync();
 
 			return View();
 		}
