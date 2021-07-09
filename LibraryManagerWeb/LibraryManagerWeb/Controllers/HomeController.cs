@@ -33,79 +33,13 @@ namespace LibraryManagerWeb.Controllers
 
 		public async Task<IActionResult> Index()
 		{
-			var authorWithRelated = new Author
-			{
-				Name = "Dan",
-				LastName = "Simmons",
-				AuthorUrl = "dan-simmons",
-				Books = new List<Book>
-				{
-					new Book
-					{
-						Title = "Los cantos de Hyperion",
-						BookFiles = new List<BookFile>
-						{
-							new BookFile
-							{
-								Format = new BookFormat
-								{
-									Name = "Daisy"
-								},
-								InternalFilePath = "los-cantos-de-hyperion.zip"
-							}
-						},
-						BookImage = new BookImage
-						{
-							Caption = "Portada de Los cantos de Hyperion",
-							Alt = "En la portada aparece un dibujo muy bonito.",
+			var stephen = await _context.Authors.FirstAsync(a => a.Name == "Stephen" && a.LastName == "King");
+			_context.Authors.Remove(stephen);
+			await _context.SaveChangesAsync();
 
-							ImageFilePath = "los-cantos-de-hyperion.jpg"
-						},
-						Publisher = new Publisher
-						{
-							Name = "The best Scifi"
-						},
-						Ratings = new List<BookRating>
-						{
-							new BookRating
-							{
-								Stars = 5,
-								Username = "Juanjo"
-							}
-						},
-						Sinopsis = "Es la sinopsis de Los cantos de Hyperion.",
-						Tags = new List<Tag>
-						{
-							new Tag
-							{
-								Value = "cienci ficción" },
-							new Tag
-							{
-								Value = "futurista"
-							},
-							new Tag
-							{
-								Value = "espacio"
-							},
-							new Tag
-							{
-								Value = "inteligencia artificial"
-							}
-						}
-					}
-				}
-			};
-			
-			await _context.Authors.AddAsync(authorWithRelated);
-			try
-			{
-				await _context.SaveChangesAsync();
-			}
-			catch (Exception ex)
-			{
-			}
-
-
+			var guijarro = await _context.Books.SingleAsync(b => b.Title == "Un guijarro en el cielo");
+			guijarro.BookImage = null;
+			await _context.SaveChangesAsync();
 
 				return View();
 		}

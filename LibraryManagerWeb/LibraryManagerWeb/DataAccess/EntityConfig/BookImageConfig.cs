@@ -24,7 +24,8 @@ namespace LibraryManagerWeb.DataAccess.EntityConfig
 
 			bookImageBuilder.HasData(new[]
 			{
-				new BookImage { BookImageId = 1, BookId = 1, ImageFilePath = "img.jpg", Caption = "text", Alt = "Una imagen del libro" }
+				new BookImage { BookImageId = 1, BookId = 1, ImageFilePath = "img.jpg", Caption = "text", Alt = "Una imagen del libro" },
+				new BookImage { BookImageId = 2, BookId = 4, ImageFilePath = "img.jpg", Caption = "text", Alt = "Una imagen del libro" }
 			});
 		}
 	}
