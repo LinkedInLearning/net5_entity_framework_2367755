@@ -33,7 +33,23 @@ namespace LibraryManagerWeb.Controllers
 
 		public async Task<IActionResult> Index()
 		{
+			var transaction = _context.Database.BeginTransaction();
 			var stephen = await _context.Authors.SingleOrDefaultAsync(a => a.Name == "Stephen" && a.LastName == "King");
+			var book = new Book { Author = stephen, Title = "El instituto", PublisherId = 1 };
+			_context.Books.Add(book);
+			await _context.SaveChangesAsync();
+			var image = new BookImage { Book = book, Caption = "Es una fotografía", ImageFilePath = "img.jpg" };
+			book.BookImage = image;
+			try
+			{
+				await _context.SaveChangesAsync();
+				await transaction.CommitAsync();
+			}
+			catch (Exception ex)
+			{
+				// error.
+			}
+
 
 			return View();
 		}
