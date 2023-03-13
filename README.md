@@ -21,4 +21,4 @@ Algunas ramas tendrán un estado inicial y otro final. Están marcadas con las l
 [0]: # (Replace these placeholder URLs with actual course URLs)
 
 [lil-course-url]: https://www.linkedin.com/learning/dot-net-5-entity-framework-core-esencial/
-[lil-thumbnail-url]: https://media-exp1.licdn.com/dms/image/C4E0DAQFFX5Qxt_X1MA/learning-public-crop_675_1200/0/1631110464711?e=1646960400&v=beta&t=--GsjTVEuj1XQTRRwiBBlc1fVA7kzUPDarLwS0XrFZo
+[lil-thumbnail-url]: https://cdn.lynda.com/course/2367755/2367755-1631109479794-16x9.jpg
